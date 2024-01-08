@@ -13,6 +13,7 @@ heroImage: 'https://i.wolves.top/picgo/202401072324448.png'
 ## 服务
 
 ```
+apk add openrc
 rc-update add docker boot
 ```
 
