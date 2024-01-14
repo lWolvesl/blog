@@ -11,18 +11,12 @@ heroImage: 'https://i.wolves.top/picgo/202311291654492.png'
 
     - [steamtools](https://www.steamtools.net/zn.html) - [Github](https://github.com/st2024/Steamtools)
 
-    - [清单工具](https://github.com/pjy612/SteamManifestCache)
-
-- 下载列表 - 点击可下载(不确保最新版本) - 也可自行前往官网下载
-    - [Steamtools](https://i.wolves.top/picgo/202311291948027.exe)
-    - [清单工具运行库](https://i.wolves.top/tools/202311251318994.exe)
-    - [清单工具](https://i.wolves.top/picgo/202401041800720.zip)
-        - 注意：清单工具版本过期将会提示当前版本不可用，重新下载新版即可
-        - 当前分流版本`v2.13.7`
+    - [清单工具 - 亡了](https://github.com/pjy612/SteamManifestCache)
+    - ![](https://i.wolves.top/picgo/202401142142555.png)
 
 <br/>
 
-> <p style="color: orangered">注意</p> 由于steamtools更新，导致其与清单工具不兼容，目前可用文件覆盖的方式解决
+> <p style="color: orangered">注意</p> 由于steamtools更新，导致不兼容，目前可用文件覆盖的方式解决
 
 - 下载文件 - [Stool.zip](https://i.wolves.top/picgo/202401041805565.zip)
 - 将文件解压到`C:\Users\(你自己的用户)\AppData\Roaming`
@@ -44,28 +38,39 @@ heroImage: 'https://i.wolves.top/picgo/202311291654492.png'
 
 <br/>
 
-### 清单工具
+[//]: # (### 清单工具)
 
-#### 1.安装清单工具
+[//]: # ()
+[//]: # (#### 1.安装清单工具)
 
-- 下载清单工具和清单工具运行库(实际上是.NET)
+[//]: # ()
+[//]: # (- 下载清单工具和清单工具运行库&#40;实际上是.NET&#41;)
 
-![image-20231129194129369 |inline](https://i.wolves.top/picgo/202311291941428.png)
+[//]: # ()
+[//]: # (![image-20231129194129369 |inline]&#40;https://i.wolves.top/picgo/202311291941428.png&#41;)
 
-#### 2.运行，输入`appid`即可下载清单
+[//]: # ()
+[//]: # (#### 2.运行，输入`appid`即可下载清单)
 
-<br/>
+[//]: # ()
+[//]: # (<br/>)
 
-![image-20231129194241474 |inline](https://i.wolves.top/picgo/202311291942493.png)
+[//]: # ()
+[//]: # (![image-20231129194241474 |inline]&#40;https://i.wolves.top/picgo/202311291942493.png&#41;)
 
-> 如图`appid`就是`289070`
+[//]: # ()
+[//]: # (> 如图`appid`就是`289070`)
 
-<video width="100%" src="https://i.wolves.top/picgo/202311292004022.mov" controls>   你的浏览器不支持 <code>video</code> 标签。 </video>
+[//]: # ()
+[//]: # (<video width="100%" src="https://i.wolves.top/picgo/202311292004022.mov" controls>   你的浏览器不支持 <code>video</code> 标签。 </video>)
 
-- 导入成功
-- 如果游戏更新了，steam客户端下载时显示清单失效等问题，就重复导入清单步骤即可，大多数情况下无需重启steam，直接点击更新就行
+[//]: # ()
+[//]: # (- 导入成功)
 
-<br/>
+[//]: # (- 如果游戏更新了，steam客户端下载时显示清单失效等问题，就重复导入清单步骤即可，大多数情况下无需重启steam，直接点击更新就行)
+
+[//]: # ()
+[//]: # (<br/>)
 
 ### 关于DLC
 
@@ -76,8 +81,8 @@ heroImage: 'https://i.wolves.top/picgo/202311291654492.png'
 
 <br/>
 
-### 关于D加密
+### 关于D加密或游戏下载
 
-- 已知的解决办法是用已经购买游戏的账户启动一次，然后使用steam就可以在自己的账户游玩
-- 账户可以pdd，也可以考虑[70games](https://70games.net/)
+- D加密已知的解决办法是用已经购买游戏的账户启动一次，然后使用steam就可以在自己的账户游玩
+- 游戏下载账户可以pdd，也可以考虑[70games](https://70games.net/)
 
