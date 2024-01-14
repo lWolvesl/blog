@@ -13,6 +13,8 @@ heroImage: 'https://i.wolves.top/picgo/202401142147310.png'
 
 > 注意本教程全程按照给定shell命令挨个执行即可
 
+> 若需要代理,请移步<a href="../allproxy" target="_blank">代理设置</a>
+
 ```shell
 conda create -n open-mmlab python=3.7 pytorch==1.7.0 cudatoolkit=10.1 torchvision -c pytorch -y
 conda activate open-mmlab
@@ -70,7 +72,7 @@ python demo_zero-shot-oriented-detection.py \
     (所需分割的图片的路径) \
     ../mmrotate/configs/rotated_fcos/rotated-fcos-hbox-le90_r50_fpn_1x_dota.py \
     ../models/rotated_fcos_sep_angle_r50_fpn_1x_dota_le90-0be71a0c.pth \
-    --sam-type "vit_b" --sam-weight ../models/sam_vit_b_01ec64.pth --out-path output.png
+    --sam-type "vit_b" --sam-weight ../models/sam_vit_b_01ec64.pth --out-path ./output.png
 ```
 
 > 注意此处要传入所需分割图片的路径，当执行完成后，将在当前文件夹生成`output.png`为分割后图片，效果如下
