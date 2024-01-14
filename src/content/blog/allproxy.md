@@ -7,6 +7,12 @@ heroImage: 'https://i.wolves.top/picgo/202401142216861.png'
 
 <p style="color: aquamarine;text-align: center">POST ON 2022-02-05 BY WOLVES</p>
 
+- [控制台终端代理](#%E6%8E%A7%E5%88%B6%E5%8F%B0%E7%BB%88%E7%AB%AF%E4%BB%A3%E7%90%86)
+- [Git代理](#git%E4%BB%A3%E7%90%86)
+- [Python相关代理](#python%E7%9B%B8%E5%85%B3%E4%BB%A3%E7%90%86)
+    - [conda](#conda)
+    - [pip/mim](#pipmim)
+
 #### 控制台终端代理
 
 ```shell
@@ -31,7 +37,11 @@ git config --global --unset https.proxy
 
 > 此处的代理具体`协议/ip/端口`应当自行设置
 
-#### Python相关
+#### Python相关代理
+
+> 若在控制台设置了终端代理，则`python`执行时会自动走代理
+
+##### conda
 
 ```shell
 # conda
@@ -49,6 +59,8 @@ conda config --add channels https://mirrors.tuna.tsinghua.edu.cn/anaconda/cloud/
 conda config --set show_channel_urls yes
 ```
 
+##### pip/mim
+
 ```shell
 # pip 在具体命令后加入 --proxy=192.168.31.5:10809
 pip install xxx --proxy=192.168.31.5:10809
@@ -59,5 +71,5 @@ pip install xxx --proxy=192.168.31.5:10809
 mim install xxx --proxy=192.168.31.5:10809
 ```
 
-> 此处的代理具体`协议/ip/端口`应当自行设置，若在控制台设置了终端代理，则`python`执行时会自动走代理
+> 此处的代理具体`协议/ip/端口`应当自行设置
 
