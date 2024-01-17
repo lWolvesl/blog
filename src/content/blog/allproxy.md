@@ -17,8 +17,8 @@ heroImage: 'https://i.wolves.top/picgo/202401142216861.png'
 
 ```shell
 # linux
-export http_proxy=http://192.168.31.192:10809
-export https_proxy=http://192.168.31.192:10809
+export http_proxy=http://192.168.0.102:7890
+export https_proxy=http://192.168.0.102:7890
 ```
 
 > 也可以将这两行写入用户的`~/.bashrc`中，之后启动终端将自动配置，此处的代理具体`协议/ip/端口`应当自行设置
@@ -28,8 +28,8 @@ export https_proxy=http://192.168.31.192:10809
 ```shell
 # linux / windows / mac 通用
 # 长期使用
-git config --global https.proxy http://127.0.0.1:1080
-git config --global https.proxy https://127.0.0.1:1080
+git config --global https.proxy http://192.168.0.102:7890
+git config --global https.proxy http://192.168.0.102:7890
 # 取消代理
 git config --global --unset http.proxy
 git config --global --unset https.proxy
@@ -48,8 +48,8 @@ git config --global --unset https.proxy
 vim ~/.condarc
 # 在其中加入proxy如下
 proxy_servers:
-  http: http://10.16.41.210:8086
-  https: https://10.16.41.210:8086
+  http: http://192.168.0.102:7890
+  https: http://192.168.0.102:7890
   
 # 也可以设置清华源
 conda config --add channels https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/free/
@@ -62,13 +62,13 @@ conda config --set show_channel_urls yes
 ##### pip/mim
 
 ```shell
-# pip 在具体命令后加入 --proxy=192.168.31.5:10809
-pip install xxx --proxy=192.168.31.5:10809
+# pip 在具体命令后加入 --proxy=192.168.31.5:7890
+pip install xxx --proxy=192.168.0.102:7890
 ```
 
 ```shell
-# openmim 在具体命令后加入 --proxy=192.168.31.5:10809
-mim install xxx --proxy=192.168.31.5:10809
+# openmim 在具体命令后加入 --proxy=192.168.31.5:7890
+mim install xxx --proxy=192.168.0.102:7890
 ```
 
 > 此处的代理具体`协议/ip/端口`应当自行设置
