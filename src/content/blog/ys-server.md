@@ -2,7 +2,6 @@
 title: 'service state'
 pubDate: 3999-08-10
 description: 'service state'
-heroImage: 'https://i.wolves.top/picgo/202401142216861.png'
 ---
 
 <p style="color: aquamarine;text-align: center">POST ON 2024-01-019 BY WOLVES</p>
