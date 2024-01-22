@@ -16,8 +16,9 @@ heroImage: 'https://i.wolves.top/picgo/202401142147310.png'
 > 若需要代理,请移步<a href="../allproxy" target="_blank">代理设置</a>
 
 ```shell
-conda create -n open-mmlab python=3.7 pytorch==1.7.0 cudatoolkit=10.1 torchvision -c pytorch -y
+conda create -n open-mmlab python=3.8 pytorch -y
 conda activate open-mmlab
+pip install torch==1.9.1+cu111 torchvision==0.10.1+cu111 -f https://download.pytorch.org/whl/torch_stable.html
 pip install openmim
 mim install mmcv-full
 mim install mmdet
@@ -40,7 +41,12 @@ cd mmrotate_sam
 wget https://raw.githubusercontent.com/open-mmlab/playground/main/mmrotate_sam/data_builder.py
 wget https://github.com/open-mmlab/playground/raw/main/mmrotate_sam/demo_zero-shot-oriented-detection.py
 wget https://github.com/open-mmlab/playground/raw/main/mmrotate_sam/eval_zero-shot-oriented-detection_dota.py
+git clone https://github.com/Li-Qingyun/sam-mmrotate.git
+mv sam-mmrotate/configs ../mmrotate/configs
+rm -rf sam-mmrotate
 ```
+
+> 由于这个项目又是基于[sam-mmrotate](https://github.com/Li-Qingyun/sam-mmrotate.git)项目优化而来的，因此还需下载其文件
 
 - 继续安装其需要的依赖
 
@@ -53,16 +59,6 @@ pip install opencv-python pycocotools matplotlib onnxruntime onnx
 mkdir ../models
 wget -P ../models https://dl.fbaipublicfiles.com/segment_anything/sam_vit_b_01ec64.pth
 wget -P ../models https://download.openmmlab.com/mmrotate/v0.1.0/rotated_fcos/rotated_fcos_sep_angle_r50_fpn_1x_dota_le90/rotated_fcos_sep_angle_r50_fpn_1x_dota_le90-0be71a0c.pth
-```
-
-> 注意，此处官网教程要求安装`torch==1.9.1+cu111 torchvision==0.10.1+cu111`，但实测`1.7`也是正常的，无需执行
-
-- 由于这个项目又是基于[sam-mmrotate](https://github.com/Li-Qingyun/sam-mmrotate.git)项目优化而来的，因此还需下载其文件
-
-```shell
-git clone https://github.com/Li-Qingyun/sam-mmrotate.git
-mv sam-mmrotate/configs ../mmrotate/configs
-rm -rf sam-mmrotate
 ```
 
 #### 3.执行
