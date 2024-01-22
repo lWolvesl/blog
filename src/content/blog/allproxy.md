@@ -29,7 +29,7 @@ export https_proxy=http://192.168.0.102:7890
 # linux / windows / mac 通用
 # 长期使用
 git config --global https.proxy http://192.168.0.102:7890
-git config --global https.proxy http://192.168.0.102:7890
+git config --global http.proxy http://192.168.0.102:7890
 # 取消代理
 git config --global --unset http.proxy
 git config --global --unset https.proxy
@@ -56,7 +56,6 @@ conda config --add channels https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/f
 conda config --add channels https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/main/
 conda config --add channels https://mirrors.tuna.tsinghua.edu.cn/anaconda/cloud/pytorch/
 conda config --add channels https://mirrors.tuna.tsinghua.edu.cn/anaconda/cloud/conda-forge/
-conda config --set show_channel_urls yes
 ```
 
 ##### pip/mim
