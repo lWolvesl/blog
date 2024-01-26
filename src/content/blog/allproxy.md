@@ -63,6 +63,8 @@ conda config --add channels https://mirrors.tuna.tsinghua.edu.cn/anaconda/cloud/
 ```shell
 # pip 在具体命令后加入 --proxy=192.168.31.5:7890
 pip install xxx --proxy=192.168.0.102:7890
+# 或使用清华源
+pip install xxx -i https://pypi.tuna.tsinghua.edu.cn/simple
 ```
 
 ```shell
