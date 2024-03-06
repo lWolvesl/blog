@@ -1,76 +1,51 @@
 ---
-title: '相关代理设置大全'
-pubDate: 3000-08-10
-description: 'Alpine Linux'
-heroImage: 'https://i.wolves.top/picgo/202401142216861.png'
+title: 'Stable Diffusion XL'
+pubDate: 2022-08-25
+description: 'Stable Diffusion'
+heroImage: 'https://i.wolves.top/picgo/202403050802925.png'
 ---
 
-<p style="color: aquamarine;text-align: center">POST ON 2022-02-05 BY WOLVES</p>
+<p style="color: aquamarine;text-align: center">POST ON 2024-02-01 BY WOLVES</p>
 
-- [控制台终端代理](#%E6%8E%A7%E5%88%B6%E5%8F%B0%E7%BB%88%E7%AB%AF%E4%BB%A3%E7%90%86)
-- [Git代理](#git%E4%BB%A3%E7%90%86)
-- [Python相关代理](#python%E7%9B%B8%E5%85%B3%E4%BB%A3%E7%90%86)
-    - [conda](#conda)
-    - [pip/mim](#pipmim)
+##### About 
+Stable Diffusion is a latent text-to-image diffusion model. Thanks to a generous compute donation from Stability AI and support from LAION, we were able to train a Latent Diffusion Model on 512x512 images from a subset of the LAION-5B database. Similar to Google's Imagen, this model uses a frozen CLIP ViT-L/14 text encoder to condition the model on text prompts. With its 860M UNet and 123M text encoder, the model is relatively lightweight and runs on a GPU with at least 10GB VRAM. See this section below and the model card.
 
-#### 控制台终端代理
+> Stable Diffusion Web UI
 
-```shell
-# linux
-export http_proxy=http://192.168.0.102:7890
-export https_proxy=http://192.168.0.102:7890
-```
+##### 项目地址
 
-> 也可以将这两行写入用户的`~/.bashrc`中，之后启动终端将自动配置，此处的代理具体`协议/ip/端口`应当自行设置
+[github.com/AUTOMATIC1111/stable-diffusion-webui](https://github.com/AUTOMATIC1111/stable-diffusion-webui.git)
 
-#### Git代理
+##### 常用模型/提示词网站
 
-```shell
-# linux / windows / mac 通用
-# 长期使用
-git config --global https.proxy http://192.168.0.102:7890
-git config --global http.proxy http://192.168.0.102:7890
-# 取消代理
-git config --global --unset http.proxy
-git config --global --unset https.proxy
-```
+- [civitai](https://civitai.com/)
+- [huggingface](https://huggingface.co/)
 
-> 此处的代理具体`协议/ip/端口`应当自行设置
+> Stable Diffusion Web UI On Linux
 
-#### Python相关代理
+1.Launch webui.sh
 
-> 若在控制台设置了终端代理，则`python`执行时会自动走代理
+    - For ubuntu, Please use user instead of root
+    - webui will install requirements by itself in directory venv , which includes with downloading basic model
 
-##### conda
+2.If you find the red line: Cannot locate TCMalloc. Do you have tcmalloc or google-perftool installed on your system? (improves CPU memory usage)
+    
+    - For ubuntu, Please test `apt-get install libgoogle-perftools4 libtcmalloc-minimal4 -y`
 
-```shell
-# conda
-vim ~/.condarc
-# 在其中加入proxy如下
-proxy_servers:
-  http: http://192.168.0.102:7890
-  https: http://192.168.0.102:7890
-  
-# 也可以设置清华源
-conda config --add channels https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/free/
-conda config --add channels https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/main/
-conda config --add channels https://mirrors.tuna.tsinghua.edu.cn/anaconda/cloud/pytorch/
-conda config --add channels https://mirrors.tuna.tsinghua.edu.cn/anaconda/cloud/conda-forge/
-```
+3.Because in linux without public Ipv4, you may use the proxy to access webui
+    
+    - Please write args in webui-user.sh
+    - --listen --enable-insecure-extension-access --no-gradio-queue --share 
 
-##### pip/mim
+4.There are some args else
 
-```shell
-# pip 在具体命令后加入 --proxy=192.168.31.5:7890
-pip install xxx --proxy=192.168.0.102:7890
-# 或使用清华源
-pip install xxx -i https://pypi.tuna.tsinghua.edu.cn/simple
-```
+    - To set user and password for protect, you can use `--gradio-auth user:passwd`
+    - To promote perfermence, you can use `--xformers` for enable xformers` support
+    - To select GPU, you can use `--device-id 0` to set, the number is gpu index, and you should know sd is a text-to-image by one gpu, not design for muti-gpus
 
-```shell
-# openmim 在具体命令后加入 --proxy=192.168.31.5:7890
-mim install xxx --proxy=192.168.0.102:7890
-```
 
-> 此处的代理具体`协议/ip/端口`应当自行设置
+> ERROR List
+
+- [1] [StableDiffusion WebUI 软件升级与扩展兼容 1](https://juejin.cn/post/7204356282588282940)
+- [2] [StableDiffusion WebUI 软件升级与扩展兼容 2](https://juejin.cn/post/7204356282588282940)
 
