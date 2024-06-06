@@ -48,8 +48,8 @@ git config --global --unset https.proxy
 vim ~/.condarc
 # 在其中加入proxy如下
 proxy_servers:
-  http: http://192.168.0.102:7890
-  https: http://192.168.0.102:7890
+  http: http://192.168.0.16:7890
+  https: http://192.168.0.16:7890
   
 # 也可以设置清华源
 conda config --add channels https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/free/
@@ -62,15 +62,28 @@ conda config --add channels https://mirrors.tuna.tsinghua.edu.cn/anaconda/cloud/
 
 ```shell
 # pip 在具体命令后加入 --proxy=192.168.31.5:7890
-pip install xxx --proxy=192.168.0.102:7890
+pip install xxx --proxy=192.168.0.16:7890
 # 或使用清华源
 pip install xxx -i https://pypi.tuna.tsinghua.edu.cn/simple
 ```
 
 ```shell
 # openmim 在具体命令后加入 --proxy=192.168.31.5:7890
-mim install xxx --proxy=192.168.0.102:7890
+mim install xxx --proxy=192.168.0.16:7890
 ```
 
 > 此处的代理具体`协议/ip/端口`应当自行设置
 
+## docker
+```shell
+# vim 用户/.docker/config.json
+{
+  "proxies": {
+    "default": {
+      "httpProxy": "http://192.168.0.102:7890",
+      "httpsProxy": "http://192.168.0.102:7890",
+      "noProxy": ""
+    }
+  }
+}
+```
