@@ -60,6 +60,12 @@ services:
 
 > 此处代码解释，启用了两个容器，并且将当前文件夹中的config.yaml与容器中的config.yaml绑定，设置了指定的端口转发
 
+or
+
+```shell
+docker run -itd --name clash -p 57890:7890 -p 59090:9090 -v /data/szh2/docker/clash/config.yaml:/root/.config/clash/config.yaml -v /data/szh2/docker/clash/ui:/ui dreamacro/clash
+```
+
 ## 3.运行
 
 ```shell
