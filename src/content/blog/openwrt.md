@@ -1,11 +1,22 @@
 ---
 title: 'OPENWRT'
-pubDate: 2023-08-10
+pubDate: 2017-01-01
 description: 'OPENWRT'
 heroImage: 'https://i.wolves.top/picgo/202401072337181.png'
 ---
 
 <p style="color: aquamarine;text-align: center">POST ON 2023-12-09 BY WOLVES</p>
+
+
+> fireware-bulid
+
+[immortalwrt](https://firmware-selector.immortalwrt.org/)
+
+![](https://i.wolves.top/picgo/202407201210249.png)
+
+[openwrt.ai](https://openwrt.ai/)
+
+![](https://i.wolves.top/picgo/202407201209579.png)
 
 # OrayX3A
 

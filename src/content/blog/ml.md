@@ -1,7 +1,7 @@
 ---
-title: 'ML'
-pubDate: 2022-09-25
-description: 'Stable Diffusion'
+title: 'Machine Learning for beginners'
+pubDate: 2011-01-01
+description: 'Machine Learning for beginners'
 heroImage: 'https://i.wolves.top/picgo/202407100515101.png'
 ---
 

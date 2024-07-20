@@ -1,6 +1,6 @@
 ---
 title: 'Stable Diffusion XL'
-pubDate: 2022-08-25
+pubDate: 2013-01-01
 description: 'Stable Diffusion'
 heroImage: 'https://i.wolves.top/picgo/202403050802925.png'
 ---

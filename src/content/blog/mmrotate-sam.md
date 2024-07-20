@@ -1,6 +1,6 @@
 ---
 title: '一次图像分割的尝试'
-pubDate: 2022-09-29
+pubDate: 2015-01-01
 description: 'mmrotate-sam'
 heroImage: 'https://i.wolves.top/picgo/202401142147310.png'
 ---

@@ -1,6 +1,6 @@
 ---
 title: 'Vercel serverless'
-pubDate: 2023-09-30
+pubDate: 2023-01-01
 description: '利用Vercel免费部署云函数，完全实现后台无服务器运行'
 heroImage: 'https://i.wolves.top/picgo/202310302334470.png'
 ---

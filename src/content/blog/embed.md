@@ -1,6 +1,6 @@
 ---
 title: 'Embed'
-pubDate: 2024-08-25
+pubDate: 2025-01-01
 description: 'Embed'
 heroImage: 'https://i.wolves.top/picgo/202403060835672.png'
 ---

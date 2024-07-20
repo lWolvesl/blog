@@ -1,6 +1,6 @@
 ---
 title: 'CLASH'
-pubDate: 2023-09-29
+pubDate: 2020-01-01
 description: 'a proxy tool'
 heroImage: 'https://i.wolves.top/picgo/202401080005682.png'
 ---

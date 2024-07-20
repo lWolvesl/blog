@@ -1,6 +1,6 @@
 ---
 title: 'SteamTools'
-pubDate: 2023-09-29
+pubDate: 2022-01-01
 description: 'steamtools可以让用户使用自己的账户玩电脑上steam已经下载好的游戏，无论是否用户是否拥有这款游戏'
 heroImage: 'https://i.wolves.top/picgo/202311291654492.png'
 ---

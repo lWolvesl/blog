@@ -1,6 +1,6 @@
 ---
 title: '相关代理设置大全'
-pubDate: 3000-08-10
+pubDate: 2026-01-01
 description: 'Alpine Linux'
 heroImage: 'https://i.wolves.top/picgo/202401142216861.png'
 ---

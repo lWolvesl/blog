@@ -1,6 +1,6 @@
 ---
 title: 'SAM(Segment Anything Model) Paper Concentration'
-pubDate: 2022-08-26
+pubDate: 2014-01-01
 description: 'Paper Concentration'
 heroImage: 'https://i.wolves.top/picgo/202401132206687.png'
 ---

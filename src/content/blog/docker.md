@@ -1,6 +1,6 @@
 ---
 title: 'docker rootless , gpu and other'
-pubDate: 2022-12-30
+pubDate: 2016-01-01
 description: 'docker'
 heroImage: 'https://i.wolves.top/picgo/202403060834296.png'
 ---
