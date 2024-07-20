@@ -87,3 +87,16 @@ mim install xxx --proxy=192.168.0.16:7890
   }
 }
 ```
+
+```shell
+mkdir -p ~/.config/systemd/user/docker.service.d
+vim ~/.config/systemd/user/docker.service.d/proxy.conf
+
+[Service]
+Environment="HTTP_PROXY=http://127.0.0.1:57890/"
+Environment="HTTPS_PROXY=http://127.0.0.1:57890/"
+Environment="NO_PROXY=localhost,127.0.0.1,.example.com"
+
+systemctl --user daemon-reload
+systemctl --user restart docker.servic
+```
