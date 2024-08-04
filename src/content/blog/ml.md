@@ -74,7 +74,9 @@ $$
 w = w - \alpha\cdot\frac{\partial J(w,b)}{\partial w}
 $$
 
-
+$$
+b = b - \alpha\cdot\frac{\partial J(w,b)}{\partial b}
+$$
 
 - $ \alpha $ is learning rate
 - Simultaneously update

@@ -20,7 +20,7 @@ heroImage: 'https://i.wolves.top/picgo/202401072332887.png'
 FROM python:3.10-alpine3.20
 
 RUN sed -i 's/dl-cdn.alpinelinux.org/mirrors.tuna.tsinghua.edu.cn/g' /etc/apk/repositories
-RUN apk add tzdata iproute2 git --no-cache
+RUN apk add tzdata iproute2 git bash bash-completion --no-cache
 RUN cp /usr/share/zoneinfo/Asia/Shanghai /etc/localtime
 RUN echo "Asia/Shanghai" > /etc/timezone
 
