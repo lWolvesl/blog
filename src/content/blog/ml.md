@@ -10,6 +10,17 @@ heroImage: 'https://i.wolves.top/picgo/202407100515101.png'
 <link rel="stylesheet" href="/katex/katex.min.css">
 <script defer src="/katex/katex.min.js"></script>
 <script defer src="/katex/auto-render.min.js" onload="renderMathInElement(document.body);"></script>
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        renderMathInElement(document.body, {
+            delimiters: [
+                {left: "$$", right: "$$", display: true},
+                {left: "$", right: "$", display: false}
+            ]
+        });
+    });
+</script>
+
 
 # Machine Learning
 
@@ -55,3 +66,27 @@ $$
 \underset{w,b}{minimize}\ J(w,b)
 $$
 
+### 2.2 Gridient Descent
+
+- 在当前的节点找下降速度最快的方向走一步，然后再找下一个方向，最终达到局部最小值`loacl minima`（贪心）
+
+$$
+w = w - \alpha\cdot\frac{\partial J(w,b)}{\partial w}
+$$
+
+
+
+- $ \alpha $ is learning rate
+- Simultaneously update
+  - It mains we need calculate first , then update both of the value
+- Here is negative gradient
+
+### 2.3 Learning Rate
+
+- Small
+  - Gradient descent may be slow
+- Large
+  - Gradient descent may
+    - Overshoot
+    - Fail to converge
+    - Diverge

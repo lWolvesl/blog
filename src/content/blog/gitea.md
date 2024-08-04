@@ -15,8 +15,25 @@ heroImage: 'https://i.wolves.top/picgo/202401072332887.png'
 
 ## Docker
 
+- dockerfile
+```dockerfile
+FROM python:3.10-alpine3.20
+
+RUN sed -i 's/dl-cdn.alpinelinux.org/mirrors.tuna.tsinghua.edu.cn/g' /etc/apk/repositories
+RUN apk add tzdata iproute2 git --no-cache
+RUN cp /usr/share/zoneinfo/Asia/Shanghai /etc/localtime
+RUN echo "Asia/Shanghai" > /etc/timezone
+
+RUN mkdir /data
+RUN adduser -D git
+RUN echo 'git:git' | chpasswd
+RUN chown -R git:git /data
+
+RUN pip3 install nbconvert -i https://pypi.tuna.tsinghua.edu.cn/simple
+```
+
 ```shell
-docker run -itd --name gitea -p 56000:3000 -p 56022:22 -v /data/gitea:/data gitea/gitea
+docker run -itd --name gitea -p 3000:3000 --privileged -v /volume2/docker/gitea:/data gitea:py3.10-a3.20 /data/app/docker-entrypoint
 ```
 
 ## 自定义构建
@@ -28,6 +45,31 @@ apk add git bash --no-cache
 adduer git
 su git -c '/data/app/gitea web --config /data/gitea/conf/app.ini'
 ```
+
+## jupyter支持
+- This guide will show you how to configure an external renderer to display Jupyter Notebooks. However this guide will also work for other types of files and even binary files! The sky is the limit.
+- In order to display something more attractive to the user we need some HTML, luckily Jupyter has a module called nbconvert:
+
+```shell
+# Install our converter software of choice on the Gitea machine:
+sudo apt install python3-pip
+pip3 install nbconvert
+```
+
+- then Configuring Gitea to use the converter
+```ini
+[markup.jupyter]
+ENABLED = true
+FILE_EXTENSIONS = .ipynb
+RENDER_COMMAND = "jupyter nbconvert --stdout --to html --template full "
+IS_INPUT_FILE = true
+
+[markup.sanitizer.jupyter0]
+ELEMENT = div
+ALLOW_ATTR = class
+REGEXP =
+```
+
 
 ## GITEA支持镜像上传
 

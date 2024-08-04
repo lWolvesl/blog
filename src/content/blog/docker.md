@@ -154,3 +154,8 @@ docker run -it --rm --gpus all ubuntu nvidia-smi
 # rootless 进程
 systemctl --user restart docker
 ```
+
+### docker login 时出现 x509: certificate signed by unknown authority
+- 首先获取证书公钥
+- 将公钥追加在`/etc/ssl/certs/ca-certificates.crt`内
+- 重启`docker`

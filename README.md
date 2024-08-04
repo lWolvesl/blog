@@ -103,6 +103,17 @@ wget https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js
 <link rel="stylesheet" href="/katex/katex.min.css">
 <script defer src="/katex/katex.min.js"></script>
 <script defer src="/katex/auto-render.min.js" onload="renderMathInElement(document.body);"></script>
+<!-- Auto-render inline math formulas -->
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        renderMathInElement(document.body, {
+            delimiters: [
+                {left: "$$", right: "$$", display: true},
+                {left: "$", right: "$", display: false}
+            ]
+        });
+    });
+</script>
 ```
 
 2.在使用latex脚本的位置使用(可无需使用p标签/矩阵需要使用标签包含)
