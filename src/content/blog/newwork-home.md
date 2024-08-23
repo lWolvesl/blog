@@ -80,6 +80,8 @@ heroImage: 'https://i.wolves.top/picgo/202401072337181.png'
 
 ### OPENWRT
 
+you can get anything at [official](https://archive.openwrt.org/releases/)
+
 > fireware-bulid
 
 [immortalwrt](https://firmware-selector.immortalwrt.org/)
