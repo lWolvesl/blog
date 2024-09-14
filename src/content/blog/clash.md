@@ -1,17 +1,27 @@
 ---
-title: 'CLASH'
-pubDate: 2020-01-01
+title: 'mihomo instead of clash'
+pubDate: 2018-01-01
 description: 'a proxy tool'
-heroImage: 'https://i.wolves.top/picgo/202401080005682.png'
+heroImage: 'https://i.wolves.top/picgo/202409121257063.png'
 ---
 
-<p style="color: aquamarine;text-align: center">POST ON 2022-12-31 BY WOLVES</p>
+<p style="color: aquamarine;text-align: center">POST ON 2023-12-31 BY WOLVES</p>
 
-> 作为一款使用Go语言编写的强大的网络代理工具，其能力不必多言，本文将描述如何在linux上使用(docker)
+> clash is dead, mihomo stands
+
+> clash 已死，mihomo 当立
+
+- `mihomo` 原名 `clash meta`， 由于`clash`已经凉透了，所有因此而改名，目前当小猫的内核绝大多数都是`mihomo`。
+- `Docker`一行完成`mihomo`内核搭建，满足服务器使用需求
+
+```shell
+docker run -d --name mihomo -p 7890:7890 -p 9090:9090 -v 目录/config:/root/.config/mihomo -v 目录/ui:/ui metacubex/mihomo:latest
+```
 
 ## 1.获取config文件
 
-- 从订阅转换 - [订阅网站](https://acl4ssr-sub.github.io/)/`https://acl4ssr-sub.github.io/`
+- ~~从订阅转换 - [订阅网站](https://acl4ssr-sub.github.io/)/`https://acl4ssr-sub.github.io/`~~
+- 从`clash-verge-rev`中获取
 
 > clash的订阅文件的编码格式无法在linux中编译，会出现无法识别的情况。
 
@@ -30,49 +40,15 @@ secret : '你的密码'
 
 > 完成后将config.yaml 传入服务器指定目录
 
-## 2.使用docker-compose
+## 2.放入`geoip`文件
+- `geoip`文件是一个全球`ip`数据库，通过这个配置，可以让代理工具知道什么网站应该走本地网络，什么网络应该走飞机，实现动态分流
+- 下载文件-注意下载后重命名(有的时候自动下载会下载失败,因此提前下载)
+  - [geoip.dat](https://i.wolves.top/picgo/202409121253507.dat)
+  - [geosite.dat](https://i.wolves.top/picgo/202409121254143.dat)
+  - [geoip.metadb](https://i.wolves.top/picgo/202409121254751.metadb)
 
-`镜像源 dreamacro/clash:latest`
 
-```docker-compose
-version: '3'
-
-services:
-  # Clash
-  clash:
-    image: dreamacro/clash:latest
-    container_name: clash
-    volumes:
-      - ./config.yaml:/root/.config/clash/config.yaml
-    ports:
-      - "7890:7890/tcp"
-      - "7890:7890/udp"
-      - "9090:9090"
-    restart: always
-
-  clash-dashboard:
-    image: centralx/clash-dashboard
-    container_name: clash-dashboard
-    ports:
-      - "7880:80"
-    restart: always
-```
-
-> 此处代码解释，启用了两个容器，并且将当前文件夹中的config.yaml与容器中的config.yaml绑定，设置了指定的端口转发
-
-or
-
-```shell
-docker run -itd --name clash -p 57890:7890 -p 59090:9090 -v /data/szh2/docker/clash/config.yaml:/root/.config/clash/config.yaml -v /data/szh2/docker/clash/ui:/ui dreamacro/clash
-```
-
-## 3.运行
-
-```shell
-docker-compose up --build -d
-```
-
-## 4.控制
+## 3.控制
 
 ![](https://i.wolves.top/picgo/202401080022882.png)
 

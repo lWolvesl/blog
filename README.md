@@ -76,12 +76,13 @@ This theme is based off of the lovely [Bear Blog](https://github.com/HermanMarti
 - mmrotate-sam      2015-01-01
 - openwrt           2016-01-01
 - MIAX1800          2016-06-01
+- syncthing         2016-09-01
 - docker            2017-01-01
-- Apple Grapher     2018-01-01
+- mihomo            2018-01-01
 - gitea             2019-01-01
-- clash             2020-01-01
-- stools            2022-01-01
-- Vercel serverless 2023-01-01
+- Apple Grapher     2020-01-01
+- Vercel serverless 2022-01-01
+- stools            2023-01-01
 - Alpine Linux      2024-01-01
 - embed             2025-01-01
 - allproxy          2026-01-01
