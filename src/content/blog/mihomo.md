@@ -49,6 +49,10 @@ secret : '你的密码'
 
 
 ## 3.控制
+获取`ui`(可选)
+```shell
+git clone https://github.com/metacubex/metacubexd.git -b gh-pages ./ui
+```
 
 ![](https://i.wolves.top/picgo/202401080022882.png)
 

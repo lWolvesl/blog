@@ -14,6 +14,7 @@ heroImage: 'https://i.wolves.top/picgo/202401072337181.png'
 ## IPV6
 
 - 国内ISP逐步完全提供IPV6，虽然为动态，但是不影响使用
+- 当前河南联通家庭网络最高可以申请/60的PD
 
 ### 设置IPV6
 

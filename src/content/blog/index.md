@@ -5,7 +5,9 @@ description: 'index'
 heroImage: 'https://i.wolves.top/picgo/202407201229851.png'
 ---
 
-> Machine Learning
+
+<details>
+<summary>Machine Learning</summary>
 
 - [ML-for-beginners](/blog/ml)
   - Machine Learning for beginners
@@ -14,48 +16,74 @@ heroImage: 'https://i.wolves.top/picgo/202407201229851.png'
 - [sam](#sam)
   - segment anything
 
+</details>
 
-<a id="sam"></a>
-> SAM
+<details>
+<summary>sam</summary>
 
-- [sam-paper](/blog/sampaper) 
+- [sam-paper](/blog/sampaper)
   - 一些SAM有关的论文
 - [mmrotate-sam](/blog/mmrotate-sam)
   - 一次旋转sam分割实验
 
+</details>
 
-> Stable Diffusion
+<details>
+<summary>Stable Diffusion</summary>
 
 - [xl](/blog/stdw)
   - install and some fix
 
+</details>
 
-> Docker
+<details>
+<summary>Network and Proxy</summary>
+
+- [wireguard](/blog/wireguard)
+  - fast self-build VPN service
+- [network-home](/blog/network-home)
+  - My home network structure
+- [mihomo](/blog/mihomo)
+  - install of clash
+- [proxy setting](/blog/allproxy)
+- [mi-ax1800](/blog/miax1800)
+
+</details>
+
+<details>
+<summary>Docker</summary>
 
 - [rootless](/blog/docker)
+- [alpine](/blog/alpine)
 
+</details>
 
-> Apple chip
+<details>
+<summary>Apple chip</summary>
 
 - [Apple Matrix](/blog/ml)
   - Machine learning in apple silicon with accelerate
 - [Apple grapher](/blog/apple-grapher)
   - apple matlab lite
 
+</details>
 
-> Software and Development
+<details>
+<summary>Software and Development</summary>
 
 - [Gitea](/blog/gitea)
 - [embed](/blog/embed)
-- [vercel-serverless](blog/vercel-serverless)
-- [openwrt](/blog/openwrt)
+- [vercel-serverless](/blog/vercel-serverless)
+  - a cyber Bodhisattva （赛博菩萨）
+- [syncthing](/blog/syncthing)
+  - a fast sync service
 
-> Gaming
+</details>
+
+<details>
+<summary>Gaming</summary>
 
 - [steamtools](/blog/stools)
 
+</details>
 
-> Proxy
-
-- [clash](/blog/clash)
-- [proxy setting](/blog/allproxy)
