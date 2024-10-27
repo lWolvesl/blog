@@ -5,10 +5,78 @@ description: 'some thinking'
 heroImage: 'https://i.wolves.top/picgo/202410061408862.png'
 ---
 
-<p style="color: aquamarine;text-align: center">UPDATED ON 2024-10-06 BY WOLVES</p>
+<p style="color: aquamarine;text-align: center">UPDATED ON 2024-10-27 BY WOLVES</p>
 
 ## 目录
 - [AI驱动NPC](#2024-10-06-14-08-00)
+- [Qwen2-VL-2B](#2024-10-15-15-42-00)
+- [Qwen2.5-0.5B](#2024-10-09-17-00-00)
+- [llama3.2 多模态](#2024-10-08-12-33-00)
+
+
+## 2024-10-26 11:00:00
+[MLX-Community](https://huggingface.co/mlx-community)
+[github-mlx](https://github.com/ml-explore/mlx)
+[mlx-intro](https://ml-explore.github.io/mlx/build/html/index.html)
+MLX - 一个类似 NumPy 的数组框架，专为在 Apple 芯片上高效、灵活地进行机器学习而设计，由 Apple 机器学习研究团队提供。
+MLX 的设计灵感来自 PyTorch、Jax 和ArrayFire 等框架。
+
+> feeling
+- 由于高度的软硬结合，整个mlx的包仅有22MB，但是其却能够完成numpy和torch几乎所有现有的操作，而且由于其可以直接调用mac系统底层的加速运算，其运行效率极高。而这些操作在torch上，需要动辄几个G的pip包来完成。
+- 最让我惊奇的是，他直接运用了m系列芯片的统一内存架构的优势，在没有接触机器学习的时候，我认为统一内存虽然增加了速度，但是价格却比一般使用标准pc的内存要贵的多，戏称为金子内存，但是现在我有了完全不一样的感觉。
+- MLX很好的利用了统一内存，直接可以将cpu利好和gpu利好的程序分开运算，直接做到了性能翻倍！
+
+> thinking
+- 首先，先讲一下什么是统一内存，统一内存是苹果公司为Mac系列芯片设计的一种内存管理技术，它将CPU、GPU和系统内存集成到一个统一的内存池中，使得数据可以在不同硬件组件之间无缝传输，从而提高计算效率，也就是说，与传统pc不同，mac的内存是直接和显存打通的。
+- 其次，在pytorch的程序编写时，经常要用到model.to(device)，这个操作是将模型加载到指定的设备上，然后再运行，而这，就导致了，在实际运行时，我们只能选择将任务交给某个设备组运行，而不能同时使用cpu和gpu来计算对于他们来说运行快的任务。
+- 举个例子，对于`matmul`矩阵乘法操作，在低维度时，因为启动gpu执行会被其启动并行时的损耗所干扰，因此cpu的计算速度比gpu快的多。
+- 最后，虽然MLX的这个功能很好，但是无法应用到主流服务器上，因为计算机的硬件架构都不同，但是其思想却值得学习，是否可以优化torch，实现自动任务选择，根据其利好程度决定任务交给哪个设备组运行。
+
+> practice
+- 在[MLX-Community](https://huggingface.co/mlx-community)中，我们可以看到很多已经转换为mlx所直接运行的大模型，这里测试了qwen2.5-0.5b的int4量化，在我的M1 macbookair上，可以做到114.914 tokens-per-sec，这个int4的量化所使用的内存只有不到300MB，这个速度太快了，你要知道M1只是一个峰值功耗20W的SOC
+- 另外我在A800上测试了使用pytorch，同样是int4量化的qwen2.5-0.5b，其速度只有5.42 tokens/秒，这个差距太大了，而且其显存占用达到了876MB，你要知道这是一个TDP功耗400W的显卡，这个测试并不严谨，A800拥有80G的显存以及远超M1的float算力，他是为大模型准备的，让其运行小模型本身就不公平，但是从这里可以我们可以看出优化框架运算，能够让模型的执行速度有一个质的提升，这个思想希望以后我可以付诸实践
+
+## 2024-10-15 15:42:00
+[Qwen2-VL-2B](https://huggingface.co/Qwen/Qwen2-VL-2B-Instruct)
+来自千问的多模态小模型，可以进行图像分析，并且可以进行文本推理。
+
+> feeling
+- 今天同时测试了llama3.2-11b和qwen2-vl-2b，给我的感觉就是llama的多模态对于图片的描述，过于简单，完全不像人在描述，有点过于机械化了，而且就算我调整了最大token输出量，依旧感觉其效果甚至不如qwen2-vl的2b小模型，而且这个2b小模型还会有很多形容词以及联想情景。
+
+> thinking
+- 目前多模态小模型的应用场景还有点窄，对于内容分割这一部分领域，有专业的cv、yolo、svm去做，而多模态小模型目前只能做到简单的分析，于生产上并无太大帮助。
+
+## 2024-10-09 17:00:00
+[Qwen2.5-0.5B](https://huggingface.co/Qwen/Qwen2.5-0.5B-Instruct)
+试用完qwen0.5b后，同样是小模型，千问在中文能力上比llama3.2强很多，而且更容易按照指令进行回复，llama的小模型普遍容易出现幻觉，问着问着就不知道回答到哪里去了。
+
+> practice
+- [翻译器] 依靠qwen0.5b，我成功做出了一个翻译器，可以本地运行的，并且可以进行润色，但是润色效果一般，而且润色后，翻译效果会变差。而且目前的这些LLM与其参数量有相当大的关系，小模型的效果远不如那几个大的版本，但是小模型在量化后甚至load之后只有300MB-500MB的内存开销，而且生成token的效率要高很多。
+
+## 2024-10-08 12:33:00
+[web page LLAMA STACK](https://ai.meta.com/blog/llama-3-2-connect-2024-vision-edge-mobile-devices/)
+[llama3.2](https://www.llama.com/docs/model-cards-and-prompt-formats/llama3_2)
+
+llama3.2 现在可用的有1b,3b,11b,90b,405b。其中1b,3b可用用于移动或边缘设备，轻量级模型推理，而11b,90b,405b为多模态模型，不仅可以进行文本推理，还可以进行图像分析以及生成。
+
+> feeling
+
+- 它的多模态能力比其他开源的模型都强大很多，也就是说，以后很多的app开发，都可以直接通过这个模型而不需要进行重复训练。
+- 它量化的两个超小模型才是最关键的，1B和3B的模型，在边缘设备的表现能力将会非常强，可以做到实时交互。
+
+> thinking
+
+- 这两个小模型，可以用于很多场景，如：
+    - 边缘计算：在自动驾驶、智能家居等设备上运行，提供实时决策支持。
+    - 移动应用：在智能手机上运行，提供高效的文本生成能力，这和apple的那个ai就很像了，apple的ai就是在手机本地进行运算，提供很多文本方面比如翻译润色的功能，这些都可以通过这个超小模型去解决
+    - 游戏开发：(直接和2024-10-06的video关联)因为受限于终端设备的显存，无法运行很大的模型比如之前的llama3.1的8B，而这个量化的1B模型能很轻易的解决这个问题。
+    - 更多本地应用：比如我可以直接为我的mac开发一个真正的贾维斯，还有类似于翻译这样的功能，给予正确的提示词，就可以在本地以不到2G显存的代价，运行一个万能的后端。
+
+> practice
+
+- 在ollama和open-wei ui上，可以以超低的难度部署这么一个翻译工具，然后就可以在任何地方使用，而不需要服务器，完全本地运算。
+![](https://i.wolves.top/picgo/202410091724240.png)
+
 
 ## 2024-10-06 14:08:00
 After <span style="color: red">video</span> : [我让六个AI合租，居然出了个海王](https://www.bilibili.com/video/BV1MkxeeYEEb)
