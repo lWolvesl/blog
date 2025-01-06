@@ -71,6 +71,8 @@ This theme is based off of the lovely [Bear Blog](https://github.com/HermanMarti
 - index             2000-01-01
 - ml                2011-01-01
 - thinking          2011-06-01
+- algorithm         2011-09-01
+- numpy             2011-11-01
 - amx               2012-01-01
 - stdw              2013-01-01
 - sampaper          2014-01-01
