@@ -1,6 +1,6 @@
 ---
 title: 'THINKING'
-pubDate: 2011-06-01
+pubDate: 2000-06-01
 description: 'some thinking'
 heroImage: 'https://i.wolves.top/picgo/202410061408862.png'
 ---

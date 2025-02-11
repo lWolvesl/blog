@@ -5,8 +5,8 @@ description: 'Machine Learning for beginners'
 heroImage: 'https://i.wolves.top/picgo/202407100515101.png'
 ---
 
-<p style="color: aquamarine;text-align: center">POST   ON 2024-03-05 BY WOLVES</p>
-<p style="color: lightblue;text-align: center">UPDATE ON 2024-10-05 BY WOLVES</p>
+<p style="color: aquamarine;text-align: center">POST   ON 2023-03-05 BY WOLVES</p>
+<p style="color: lightblue;text-align: center">UPDATE ON 2025-01-06 BY WOLVES</p>
 
 <link rel="stylesheet" href="/katex/katex.min.css">
 <script defer src="/katex/katex.min.js"></script>
@@ -25,7 +25,27 @@ heroImage: 'https://i.wolves.top/picgo/202407100515101.png'
 
 # Machine Learning
 
-You can see the code of this blog on [github](https://github.com/wolves/ml)
+You can see the code of this blog on <a href="https://github.com/lWolvesl/AI-learning.git" target="_blank">github</a>
+
+- [Machine Learning](#machine-learning)
+  - [1.First chapter - instruction](#1first-chapter---instruction)
+    - [1.1 supervised learning](#11-supervised-learning)
+    - [1.2 unsupervised learing](#12-unsupervised-learing)
+    - [1.3 Jupyter Notebook](#13-jupyter-notebook)
+  - [2.Supervised Learing](#2supervised-learing)
+    - [2.1 Linear regression](#21-linear-regression)
+    - [2.2 Gridient Descent](#22-gridient-descent)
+    - [2.3 Multiple features (variables)](#23-multiple-features-variables)
+      - [2.3.1 Model](#231-model)
+      - [2.3.2 vectorization](#232-vectorization)
+      - [2.3.3 Feature scaling](#233-feature-scaling)
+      - [2.3.4 Checking Convergence of Gradient Descent](#234-checking-convergence-of-gradient-descent)
+      - [2.3.5 Feature Engineering](#235-feature-engineering)
+      - [2.3.6 Polynomial Regression](#236-polynomial-regression)
+    - [2.4 Logistic Regression](#24-logistic-regression)
+    - [2.5 Porblem of Fitting the Model](#25-porblem-of-fitting-the-model)
+      - [2.5.1 Address Overfit](#251-address-overfit)
+        - [2.5.1.1 Regularization](#2511-regularization)
 
 ## 1.First chapter - instruction
 
@@ -59,7 +79,9 @@ A experiment:`https://github.com/mohadeseh-ghafoori/Coursera-Machine-Learning-Sp
 
 $$
 \text{Residual} = \hat{y}^{(i)} - y^{(i)}
-\\
+$$
+
+$$
 J(w,b) = \frac{1}{2m} \sum_{i=1}^{m} (y_{w,b}(x^{(i)}) - y^{(i)})^2
 $$
 
@@ -270,4 +292,34 @@ $$
 
 $$
 \frac{\partial J(\vec{w},b)}{\partial b} = \frac{1}{m} \sum_{i=1}^{m} (f_{\vec{w},b}(x^{(i)}) - y^{(i)})
+$$
+
+### 2.5 Porblem of Fitting the Model
+
+- Overfit
+- Underfit or high bias
+- Generalization
+
+#### 2.5.1 Address Overfit
+
+- Get more training data
+- Select features to include/exclude
+- Increase or decrease the regularization parameter $\lambda$
+
+##### 2.5.1.1 Regularization
+
+- Add a regularization term to the cost function
+
+- 在损失函数中对大权重进行惩罚，如大权重前✖️一个1000的系数，这样大权重就会变得很小，从而避免过拟合。
+- 更加通用的场景，就是对每个权重乘以一个系数，这个系数是$\frac{\lambda}{2m}$，这样可以避免不知道哪个权重更重要导致的损失。
+- 对于偏置，通常不进行惩罚，因为偏置对结果的影响不大。
+
+- 正则化后的损失函数 MSE + regularization term
+$$
+J(\vec{w},b) = \frac{1}{2m} \left( \sum_{i=1}^{m} (f_{\vec{w},b}(x^{(i)}) - y^{(i)})^2 + \frac{\lambda}{2m} \sum_{j=1}^{n} w_j^2 \right)
+$$
+
+- 逻辑回归
+$$
+J(\vec{w},b) = \frac{1}{2m} \left( \sum_{i=1}^{m} \left( -y^{(i)}\ln(f_{\vec{w},b}(x^{(i)})) - (1-y^{(i)})\ln(1-f_{\vec{w},b}(x^{(i)})) \right) + \frac{\lambda}{2m} \sum_{j=1}^{m} w_j^2 \right)
 $$

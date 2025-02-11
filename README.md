@@ -69,8 +69,9 @@ This theme is based off of the lovely [Bear Blog](https://github.com/HermanMarti
 
 ## 文档顺序
 - index             2000-01-01
+- thinking          2000-06-01
+- dl                2010-01-01
 - ml                2011-01-01
-- thinking          2011-06-01
 - algorithm         2011-09-01
 - numpy             2011-11-01
 - amx               2012-01-01
