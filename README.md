@@ -83,6 +83,7 @@ This theme is based off of the lovely [Bear Blog](https://github.com/HermanMarti
 - syncthing         2016-09-01
 - docker            2017-01-01
 - wireguard         2017-06-01
+- how to read paper 2017-09-01
 - mihomo            2018-01-01
 - gitea             2019-01-01
 - Apple Grapher     2020-01-01

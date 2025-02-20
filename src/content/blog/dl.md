@@ -273,6 +273,10 @@ $n_{in}$ 表示当前层的输入神经元数量
     - the value range is [0,255]
     - It`s always used in object detection or multi-class classification
 
+#### 9.3 SVM
+
+- Support Vector Machine is a type of machine learning algorithm that is used for classification and regression.
+
 ### 10 Convolutional Neural Network
 
 - Convolutional Neural Network (CNN) is a type of neural network that is commonly used in computer vision tasks.
@@ -479,3 +483,194 @@ $$a^{[l+2]} = g(z^{[l+2]} + a^{[l]}) = g(W^{[l+2]}a^{[l+1]} + b^{[l+2]} + a^{[l]
 - It likes a full connection layer, but it is used in the convolutional layer
 
 - In practice, we will employ a pooling layer to reduce the dimensionality of the feature map, followed by a 1x1 convolution to alter the channel configuration of the feature map.
+
+#### 12.1.4 Inception Network
+
+- Inception Network is a collection of different layers. we don't know which layer is the best, we just use all of them and merge them together into a new feature map.
+
+- Inception Network use parallel structure to process the image, it uses a convolution kernels of different sizes (e.g. 1x1, 3x3, 5x5) in the same layer enables simultaneous extraction of local details and global context information
+
+```txt
+输入
+├── 1x1x64 卷积
+├── 3x3x128 卷积 → 3x3 卷积
+├── 5x5x32 卷积 → 5x5 卷积
+└── 3x3x32 最大池化 → 1x1 卷积
+输出（拼接所有分支的结果）
+```
+
+![](https://i.wolves.top/picgo/202502131827765.png)
+
+- But the Inception Network has a lot of parameters, the scale of computation is too huge. To address this issue, we can use 1x1 convolution to reduce the number of channels. It will reduce an order of magnitude.
+
+![](https://i.wolves.top/picgo/202502131854132.png)
+
+### 13. Transfer Learning
+
+- There is a huge amount of case which has been trained by others, we can use the pre-trained model to solve a new problem.
+
+- The new layer will learn the new feature, and the pre-trained layer will still learn the old feature.
+
+- The greater the influx of new data, the more layers you can replace.
+
+
+### 14. Object Detection
+
+Image Classification -> Classification with locatization -> Object Detection
+
+#### 14.1 Classification with locatization
+
+- The output will not only the classification result, but also the locatization result - bounding box.
+
+- the datset need to provide the bounding box of the object, not only the detected object, but also the background.
+
+- Sliding Window Detection
+
+- The sliding window will slide over the image, and then use the classification model to classify the image.
+
+- The bounding box will be the same size, so it will be very slow. And It gets bigger every round.
+
+![](https://i.wolves.top/picgo/202502161815547.png)
+
+![](https://i.wolves.top/picgo/202502161821976.png)
+
+![](https://i.wolves.top/picgo/202502161824784.png)
+
+- In this case, the bounding box is not accurate, and it is not a good result even it can not detect the object.
+
+#### 14.2 landmark detection
+
+- landmark detection is a technique that detects the landmark of the object, such as the eyes, mouth, nose, etc. It will provide the key points of the object.
+
+- It can be used in the face detection, the object detection, the pose estimation, etc.
+
+#### 14.3 Yolo
+
+- Yolo is means You Only Look Once, it is a method that can detect the object in the image.
+
+- First, we need to divide the image into a grid
+- Then, For each grid, we need to predict the bounding box of the object and the class of the object.
+- It will use a key point to represent the object, and the key point will be the center of the object, yolo use this point to distribute the object to the grid.
+
+- it will output S x S x (bounding box + class), and it is a matrix. (S is the number of grids)
+
+#### 14.4 Intersection Over Union
+
+- Intersection Over Union is a metric that is used to evaluate the performance of the object detection model.
+
+- It is the ratio of the intersection area to the union area of the predicted bounding box and the ground truth bounding box.
+
+- "Correct" if IoU > 0.5, it is just a personal defined threshold.
+    - The IoU is the ratio of the intersection area to the union area of the predicted bounding box and the ground truth bounding box.
+
+#### 14.5 Non-max suppression
+
+- Non-max suppression is a technique for making sure that your algorithm detects each object only once.
+
+- In a specific grid, there may be multiple bounding boxes, we maybe check it more than one time
+- So, we use Non-max suppression to make sure that the algorithm detects each object only once.
+
+- It will choose the eligible confidence score bounding box, and then suppress the other bounding box with the lower confidence score.
+
+#### 14.6 Anchor Box
+
+- Anchor Box is a technique that is used to detect the object in the image.
+
+- It will use a bounding box to detect the object, and then use the anchor box to detect the object.
+
+#### 14.7 R-CNN (regions with CNN)
+
+- It picks a few regions that makes sense to run conv net classifier.
+
+- We use a segmentation algorithm find blob points, it will find the prominent area of the image, and then we can use conv net to process it.
+
+- 根据分割出的尺度，选择合适的区域，然后进行卷积运算。
+
+- 优点
+    - 准确性高
+- 缺点
+    - 速度慢
+    - 计算量大
+
+- Fast R-CNN 
+    - 使用卷积运算，而不是滑动窗口
+    - 使用RoI池化，而不是全连接层，将候选区域映射到特征图上
+    - 使用多任务损失函数，而不是单独的分类损失函数
+
+- Faster R-CNN
+    - 使用RPN网络，而不是选择性搜索，滑动搜索框，生成候选区域
+    - 使用锚框，而不是选择性搜索
+
+
+### 15. Face Recognition
+
+- 1.Detect the face
+- 2.Detect live or not
+
+#### 15.1 Conceptions
+
+##### 15.1.1 Face Verification vs. face recognition
+
+- Face Verification
+    - input: image, face image
+    - output: whether is the same person
+
+- Face Recognition
+    - input: Has a database of K person
+    - get a new image
+    - output: judge which person
+
+#### 15.2 One-shot learning
+
+- If we use cnn, it will be not work, because we just have a little data, it is not enough to train a good model. And if there is a new person, we need re-train the model.
+
+- similarity function
+    - $d(img1, img2) = degree of difference$
+    - if $d(img1, img2) < \delta$, then they are the same person
+
+#### 15.3 Siamese Network
+
+![](https://i.wolves.top/picgo/202502201725279.png)
+
+$$d(x^{(1)}, x^{(2)}) = ||f(x^{(1)}) - f(x^{(2)})||^2$$
+
+- if the result is small, then they are the same person
+
+#### 15.4 Triplet Loss
+
+- Anchor, Positive, Negative
+
+- Anchor: the image of the person
+- Positive: the image of the same person
+- Negative: the image of the other person
+
+- want: $||f(Anchor) - f(Positive)||^2 - ||f(Anchor) - f(Negative)||^2 + \alpha \leq 0$
+
+- so the formula is:
+
+$$L = \max(0, ||f(Anchor) - f(Positive)||^2 - ||f(Anchor) - f(Negative)||^2 + \alpha)$$
+
+$$ I = \sum_{i=1}^{m} L(a^{(i)}, p^{(i)}, n^{(i)}) $$
+
+- we will need a lot of data to train the model, And the relations between Anchor, Positive, Negative is not eays to define, it is difficult to train on.
+
+#### 15.5 Face Recognition
+
+![](https://i.wolves.top/picgo/202502201743497.png)
+
+$$ \hat{y} = \sigma(\sum_{k=1}^{k}w_i|f(x^{(i)})_k - f(f^{(j)})_k| + b) $$
+
+or
+
+$$ \hat{y} = \sigma(\sum_{k=1}^{k}w_i\frac{(f(x^{(i)})_k - f(f^{(j)})_k)^2}{f(x^{(i)})_k + f(f^{(j)})_k} + b) $$
+
+- $w_i$ is the weight of the feature
+- $b$ is the bias
+- $\sigma$ is the sigmoid function
+
+### 16. Neural Style Transfer
+
+- Neural Style Transfer is a technique that is used to transfer the style of one image to another image.
+
+- It will use a content image and a style image, and then use a neural network to transfer the style of the style image to the content image.
+
