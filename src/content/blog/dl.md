@@ -69,7 +69,9 @@ Activation functions are used to introduce non-linearity into the neural network
 
 - Sigmoid function: $a = \frac{1}{1 + e^{-z}}$
 - ReLU (Rectified Linear Unit): $a = \max(0, z)$
-- Tanh (Hyperbolic Tangent): $a = \frac{e^z - e^{-z}}{e^z + e^{-z}}$
+- Tanh (Hyperbolic Tangent): 
+
+![](https://i.wolves.top/picgo/202503011533422.png)
 
 These functions help the neural network learn and generalize better.
 
@@ -673,4 +675,269 @@ $$ \hat{y} = \sigma(\sum_{k=1}^{k}w_i\frac{(f(x^{(i)})_k - f(f^{(j)})_k)^2}{f(x^
 - Neural Style Transfer is a technique that is used to transfer the style of one image to another image.
 
 - It will use a content image and a style image, and then use a neural network to transfer the style of the style image to the content image.
+
+- cost function
+
+$$ J(G) = \alpha J_{content}(C, G) + \beta J_{style}(S, G) $$
+
+- $J(G)$ is the cost function
+- $J_{content}(C, G)$ is the cost function of the content image
+- $J_{style}(S, G)$ is the cost function of the style image
+
+- content cost function
+
+$$ J_{content}(C, G) = \frac{1}{2}||a^{(C)} - a^{(G)}||^2 $$
+
+- $a^{(C)}$ is the content of the content image
+- $a^{(G)}$ is the content of the generated image
+
+- style cost function
+
+$$ J_{style}(S, G) = \sum_{l} \lambda^{[l]} J^{[l]}_{style}(S, G) $$
+
+- $J^{[l]}_{style}(S, G)$ is the cost function of the style image
+- $\lambda^{[l]}$ is the weight of the style image
+
+### 17. Sequence Models
+
+> from this part, we will learn how to use RNN, LSTM, GRU to deal with NLP(Natural Language Processing) problems.
+
+- Speech Recognition
+- Music Generation
+- Sentiment Classification
+- Machine Translation
+- Video Character Recognition
+- Name Entity Recognition
+
+#### 17.1 Notation
+
+- $x^{(i)<t>}$ is the t-th word of the i-th sentence
+- $y^{(i)<t>}$ is the t-th word of the i-th sentence
+
+#### 17.2 Math symbols
+
+- motivating example
+
+x : "I want to have a big house in the future"
+
+y : "0 0 0 0 0 1 1 0 0 0"
+
+分别对应$x^{(i)<t>}$和$y^{(i)<t>}$,这指明这个序列的长度是10以及对应标签
+
+- vocabulary
+
+$$V = \{a, big, house, in, the, future, i, want, to, have, \cdots \}$$
+
+this dictionary maybe has 10000 words, so the size of the vocabulary is 10000, it is very small for today's standard.
+
+$x^{(i)<t>}$ is the t-th word of the i-th sentence, and it is a one-hot vector, the size of the one-hot vector is the size of the vocabulary.eg. $x^{(i)<1>}$ is $\{0, 0, 0, 0, 0, 0, 0, 1, 0, 0, \cdots \}$
+
+$y^{(i)<t>}$ 即为强调内容或者是需要预测的内容
+
+#### 17.3 Recurrent Neural Network
+
+- In previous neural network, if we use the same network to deal with different input, it will be not work, because the size of the input is different too, we can't train it. Even more, It doesn't share features learned across different positions of text;
+
+- Recurrent Neural Network is a type of neural network that is used to deal with sequence data.
+
+##### 17.3.1 basic RNN model
+
+![](https://i.wolves.top/picgo/202502251550871.png)
+
+- It means the output of the previous layer is the input of the next layer.
+
+$$ a^{(t)} = \sigma(W_a[a^{(t-1)}, x^{(t)}] + b_a) $$
+
+$$ y^{(t)} = \sigma(W_y[a^{(t)}] + b_y) $$
+
+- $a^{(t)}$ is the hidden state of the t-th word
+- $x^{(t)}$ is the t-th word
+- $y^{(t)}$ is the output of the t-th word, always is probability or one-hot vector for different solutions
+- $W_a$ is the weight of the hidden state
+
+- $a-\sigma$ is always tanh or relu
+
+- $y-\sigma$ is always sigmoid
+
+- $a^{(0)}$ is the initial hidden state, it is a zero vector
+
+- $a^{(t)}$ is the hidden state of the t-th word
+
+- $[a^{(t-1)}, x^{(t)}]$ is the input of the t-th word and overlay them.
+
+![](https://i.wolves.top/picgo/202502281221714.png)
+
+##### 17.3.2 Backpropagation through time (BPTT)
+
+- loss function
+
+$$ \frac{1}{T}\sum_{t=1}^{T}L^{(t)}(\hat{y}^{(t)}, y^{(t)}) $$
+
+- $L^{(t)}$ is the loss function of the t-th word
+
+![](https://i.wolves.top/picgo/202502251618147.png)
+
+##### 17.3.3 Different types of RNNs
+
+- many to many - many inputs and many outputs - same length
+- many to one - many inputs and one output (last output) - classification
+- one to many - one input and many outputs - generation
+- one to one - one input and one output - classification
+
+![](https://i.wolves.top/picgo/202502251640736.png)
+
+#### 17.4 Language model and sequence generation
+
+##### 17.4.1 Language model
+
+- Speech recognition
+    - give a sentence, and then predict the probability of the sentence
+
+- Language model
+    - \<EOS\> is the end of the sentence
+    - 可以把上一状态的输出作为下一状态的输入
+    - 如我输入hello，他先把hell作为输入依次更新rnn的状体并且舍去输出，当输入o的时候，产出一个空格，再把空格变为当前的状态的输入写进去，依次这么做直到出现eos或者length上限
+
+##### 17.4.2 vanishing gradients
+
+- RNN is not good at dealing with long sequences, because the gradient will vanish or explode.
+
+$$
+L = \sum_{t=1}^T L_t = -\sum_{t=1}^T y_t \log \hat{y}_t
+$$
+
+- $L_t$ is the loss function of the t-th word
+- $y_t$ is the one-hot vector of the t-th word
+- $\hat{y}_t$ is the output of the t-th word
+
+
+##### 17.4.3 Gated Recurrent Unit (GRU)
+
+- 门控循环单元
+- 增强长序列记忆
+- 缓解梯度消失问题
+
+```text
+时间步 t 的计算：
+         ↗ h_{t} = tanh(W_h h_{t-1} + W_x x_t + b)
+        /
+h_{t-1} → [RNN Cell] 
+        \
+         ↘ 可能输出 y_t（如分类任务）
+```
+
+- 更新门 - 能关注的机制
+- 重置门 - 能遗忘的机制
+
+$$
+R_t = \sigma(W_r[h_{t-1}, x_t] + b_r)
+$$
+
+$$
+Z_t = \sigma(W_z[h_{t-1}, x_t] + b_z)
+$$
+
+$$
+\tilde{h}_t = \tanh(W_h[R_t \odot h_{t-1}, x_t] + b_h)
+$$
+
+$$
+h_t = Z_t \odot h_{t-1} + (1 - Z_t) \odot \tilde{h}_t
+$$
+
+![](https://i.wolves.top/picgo/202503011847621.png)
+
+- 实际使用中，尽量使用GRU和LSTM，虽然他们比RNN增加了计算，但是效果会更好
+
+##### 17.4.4 Long Short-Term Memory (LSTM)
+
+- 长短期记忆网络
+- 增强长序列记忆
+- 缓解梯度消失问题
+
+- 遗忘门 - 决定要不要保留上一个状态的信息
+- 输入门 - 决定要不要忽略掉输入的数据
+- 输出门 - 决定是不是使用隐藏状态
+
+$$
+I_t = \sigma(W_i[h_{t-1}, x_t] + b_i)
+$$
+
+$$
+F_t = \sigma(W_f[h_{t-1}, x_t] + b_f)
+$$
+
+$$
+O_t = \sigma(W_o[h_{t-1}, x_t] + b_o)
+$$
+
+$$
+\tilde{C}_t = \tanh(W_c[h_{t-1}, x_t] + b_c)
+$$
+
+$$
+C_t = F_t \odot C_{t-1} + I_t \odot \tilde{C}_t
+$$
+
+$$
+h_t = O_t \odot \tanh(C_t)
+$$
+
+$$
+y_t = \sigma(W_y[h_t, C_t] + b_y)
+$$
+
+
+- $I_t$ 是输入门
+- $F_t$ 是遗忘门
+- $O_t$ 是输出门
+- $\tilde{C}_t$ 是候选记忆单元
+- $C_t$ 是当前记忆单元
+- $h_t$ 是隐藏状态
+- $y_t$ 是输出
+
+![](https://i.wolves.top/picgo/202503022240437.png)
+
+- 相当于是多了$C_t$这么一个新的状态，可以理解为专门用来记忆长期信息，然后当前状态$h_t$根据两者进行融合
+
+- LSTM和GRU在信息的记忆和遗忘上都很灵活
+
+#### 17.5 deep RNN
+
+- 深层RNN使用多个隐藏层获取更多的非线性特征
+
+![](https://i.wolves.top/picgo/202503022250446.png)
+
+- 每个隐藏层之间传递的是$H_t$
+
+$$
+a^{[l]}_t = g(W_a^{[l]}a^{[l-1]}_t + b_a^{[l]})
+$$
+
+$$
+y_t = g(W_y[a^{[l]}_t, a^{[l-1]}_t, \cdots, a^{[1]}_t] + b_y)
+$$
+
+- $a^{[l]}_t$ 是第$l$层的隐藏状态
+- $W_a^{[l]}$ 是第$l$层的权重
+- $b_a^{[l]}$ 是第$l$层的偏置
+- $y_t$ 是输出
+- $W_y$ 是输出权重
+- $b_y$ 是输出偏置
+
+$$
+H_t^1 = f_1(H_{t-1}^1, x_t)
+$$
+
+$$
+H_t^2 = f_2(H_t^1, H_{t-1}^2, x_t)
+$$
+
+$$
+H_t^n = f_n(H_t^{n-1}, H_{t-1}^n, x_t)
+$$
+
+$$
+y_t = O_t = g(W_yH_t + b_y)
+$$
 
