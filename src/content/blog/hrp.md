@@ -33,3 +33,5 @@ heroImage: 'https://i.wolves.top/picgo/202502201626775.png'
 ## Read paper record
 > click the title to see my read paper record
 - [ResNet](https://gitea.wolves.top/wolves/Paper/src/branch/main/cv/ResNet.md)
+
+- [DenseNet](https://gitea.wolves.top/wolves/Paper/src/branch/main/cv/DenseNet.md)
