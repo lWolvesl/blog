@@ -123,7 +123,7 @@ heroImage: 'https://i.wolves.top/tools/202505021701286.png'
 
 <script>
   // 后端服务地址配置
-  var API_BASE_URL = 'https://rcube.wolves.top/cut';
+  var API_BASE_URL = 'https://cut.wolves.top/api';
   
   // 等待 DOM 加载完成
   document.addEventListener('DOMContentLoaded', () => {
