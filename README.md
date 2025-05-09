@@ -92,7 +92,6 @@ This theme is based off of the lovely [Bear Blog](https://github.com/HermanMarti
 - Alpine Linux      2024-01-01
 - embed             2025-01-01
 - allproxy          2026-01-01
-- CUT               2999-12-31
 
 
 ## 增加latex支持
