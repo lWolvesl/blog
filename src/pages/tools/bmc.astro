@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BMC 工具</title>
+</head>
+<body>
+  <div class="bmc-container">
+    <h3>输入 Token</h3>
+    <div class="input-group">
+      <input type="text" id="tokenInput" placeholder="输入 Token" />
+      <button id="sendBtn">发送请求</button>
+    </div>
+    <div id="result" class="result"></div>
+  </div>
+
+  <style>
+    .bmc-container {
+      max-width: 600px;
+      margin: 0 auto;
+      padding: 20px;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+    }
+
+    .input-group {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      margin-bottom: 15px;
+    }
+
+    input, button {
+      padding: 10px;
+      border-radius: 4px;
+      border: 1px solid #ddd;
+      font-size: 16px;
+    }
+
+    button {
+      background-color: #4a6cf7;
+      color: white;
+      border: none;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+
+    button:hover {
+      background-color: #3a5ce5;
+    }
+
+    .result {
+      margin-top: 15px;
+      white-space: pre-wrap;
+      word-wrap: break-word;
+    }
+
+    .success {
+      color: #28a745;
+      font-weight: bold;
+    }
+
+    .error {
+      color: #dc3545;
+      font-weight: bold;
+    }
+  </style>
+
+  <script>
+    const API_BASE_URL = 'http://cut.wolves.top/api/bmc';
+
+    document.addEventListener('DOMContentLoaded', () => {
+      const elements = {
+        tokenInput: document.getElementById('tokenInput') as HTMLInputElement,
+        sendBtn: document.getElementById('sendBtn') as HTMLButtonElement,
+        result: document.getElementById('result') as HTMLDivElement
+      };
+
+      const showError = (message: string) => {
+        elements.result.innerHTML = `<span class="error">${message}</span>`;
+      };
+
+      const showSuccess = (message: string) => {
+        elements.result.innerHTML = `<span class="success">${message}</span>`;
+      };
+
+      elements.sendBtn.addEventListener('click', async () => {
+        const token = elements.tokenInput.value.trim();
+
+        if (!token) {
+          showError('请输入有效的 Token');
+          return;
+        }
+
+        try {
+          const response = await fetch(`${API_BASE_URL}?token=${encodeURIComponent(token)}`);
+          if (response.ok) {
+            const data = await response.text();
+            showSuccess(`请求成功！返回结果：
+${data}`);
+          } else {
+            const error = await response.text();
+            showError(`请求失败: ${error}`);
+          }
+        } catch (error: any) {
+          showError(`请求错误: ${error.message}`);
+        }
+      });
+    });
+  </script>
+</body>
+</html>
