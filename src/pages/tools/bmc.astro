@@ -67,7 +67,7 @@
   </style>
 
   <script>
-    const API_BASE_URL = 'http://cut.wolves.top/api/bmc';
+    const API_BASE_URL = 'https://cut.wolves.top/api/bmc'; // 修改为 HTTPS
 
     document.addEventListener('DOMContentLoaded', () => {
       const elements = {
@@ -96,8 +96,7 @@
           const response = await fetch(`${API_BASE_URL}?token=${encodeURIComponent(token)}`);
           if (response.ok) {
             const data = await response.text();
-            showSuccess(`请求成功！返回结果：
-${data}`);
+            showSuccess(`请求成功！返回结果：\n${data}`);
           } else {
             const error = await response.text();
             showError(`请求失败: ${error}`);
