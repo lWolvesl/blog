@@ -75,6 +75,22 @@ mim install xxx --proxy=192.168.0.16:7890
 > 此处的代理具体`协议/ip/端口`应当自行设置
 
 ## docker
+
+### 1.default
+
+```
+sudo mkdir -p /etc/systemd/system/docker.service.d
+sudo vim /etc/systemd/system/docker.service.d/http-proxy.conf
+
+[Service]
+Environment="HTTP_PROXY=http://127.0.0.1:8123"
+Environment="HTTPS_PROXY=http://127.0.0.1:8123"
+
+systemctl --user daemon-reload
+systemctl --user restart docker.servic
+```
+
+### 2.rootless
 ```shell
 # vim 用户/.docker/config.json
 {
