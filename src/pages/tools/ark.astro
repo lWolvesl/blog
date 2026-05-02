@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ARK 服务器直连</title>
+</head>
+<body>
+  <div class="container">
+    <div class="card" id="card1" data-port="7777">
+      <div class="map-icon">
+        <svg viewBox="0 0 64 64" width="40" height="40" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M32 6C18 6 8 16 8 28c0 8 4 14 10 18l14 12 14-12c6-4 10-10 10-18 0-12-10-22-22-22z"/>
+          <path d="M32 18v20M22 28h20"/>
+          <circle cx="32" cy="28" r="4"/>
+        </svg>
+      </div>
+      <h2>孤岛</h2>
+      <p class="addr" id="addr1">正在解析...</p>
+      <span class="tag">The Island</span>
+    </div>
+
+    <div class="card" id="card2" data-port="7779">
+      <div class="map-icon valley">
+        <svg viewBox="0 0 64 64" width="40" height="40" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M8 48L20 24l8 12 8-16 12 20 8-8"/>
+          <path d="M8 48h48"/>
+          <path d="M16 48V36M32 48V28M48 48V32"/>
+        </svg>
+      </div>
+      <h2>仙境</h2>
+      <p class="addr" id="addr2">正在解析...</p>
+      <span class="tag">Ragnarok</span>
+    </div>
+  </div>
+
+  <style>
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: #0f1419;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+      padding: 24px;
+    }
+
+    .container {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+      max-width: 560px;
+      width: 100%;
+    }
+
+    @media (max-width: 480px) {
+      .container {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .card {
+      background: #1a2332;
+      border: 1px solid #263245;
+      border-radius: 16px;
+      padding: 36px 24px;
+      text-align: center;
+      transition: all 0.25s ease;
+      user-select: none;
+    }
+
+    .card.ready {
+      cursor: pointer;
+    }
+
+    .card.ready:hover {
+      transform: translateY(-4px);
+      border-color: #2d6a4f;
+      box-shadow: 0 12px 32px rgba(45, 106, 79, 0.2);
+    }
+
+    .card.ready:active {
+      transform: translateY(-1px);
+    }
+
+    .card.error {
+      border-color: #7a2e2e;
+    }
+
+    .map-icon {
+      width: 72px;
+      height: 72px;
+      margin: 0 auto 18px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 20px;
+      background: linear-gradient(135deg, #2d6a4f, #1b4332);
+      color: #fff;
+      box-shadow: 0 4px 16px rgba(45, 106, 79, 0.3);
+    }
+
+    .map-icon.valley {
+      background: linear-gradient(135deg, #4a6fa5, #2c4a7c);
+      box-shadow: 0 4px 16px rgba(74, 111, 165, 0.3);
+    }
+
+    .card.ready:hover .map-icon {
+      box-shadow: 0 6px 24px rgba(45, 106, 79, 0.4);
+    }
+
+    .card.ready:hover .map-icon.valley {
+      box-shadow: 0 6px 24px rgba(74, 111, 165, 0.4);
+    }
+
+    h2 {
+      margin: 0 0 6px 0;
+      font-size: 1.4rem;
+      font-weight: 700;
+      color: #f0f2f5;
+      letter-spacing: 1px;
+    }
+
+    .addr {
+      margin: 0 0 14px 0;
+      font-size: 0.85rem;
+      color: #7a8fa8;
+      font-family: 'SF Mono', Monaco, monospace;
+    }
+
+    .tag {
+      display: inline-block;
+      font-size: 0.7rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      color: #5a7a66;
+      background: rgba(45, 106, 79, 0.12);
+      padding: 4px 12px;
+      border-radius: 20px;
+      border: 1px solid rgba(45, 106, 79, 0.25);
+    }
+
+    .card:nth-child(2) .tag {
+      color: #6a85a8;
+      background: rgba(74, 111, 165, 0.12);
+      border-color: rgba(74, 111, 165, 0.25);
+    }
+
+  </style>
+
+  <script>
+    const DOMAIN = '1.wolves.top';
+
+    function extractARecord(data: any): string | null {
+      if (data.Status !== 0 || !data.Answer) return null;
+      for (const ans of data.Answer) {
+        if (ans.type === 1) return ans.data;
+      }
+      return null;
+    }
+
+    async function resolveIp(domain: string): Promise<string | null> {
+      try {
+        const res = await fetch(`https://dns.alidns.com/resolve?name=${encodeURIComponent(domain)}&type=1`);
+        const data = await res.json();
+        return extractARecord(data);
+      } catch {
+        return null;
+      }
+    }
+
+    function setReady(card: HTMLElement, ip: string, port: string) {
+      const url = `steam://run/346110//+connect%20${ip}:${port}`;
+      card.dataset.url = url;
+      card.classList.add('ready');
+
+      const addr = card.querySelector('.addr') as HTMLElement;
+      addr.textContent = `${ip}:${port}`;
+
+      card.addEventListener('click', () => {
+        window.location.href = url;
+      });
+    }
+
+    function setError(card: HTMLElement, message: string) {
+      card.classList.add('error');
+      const addr = card.querySelector('.addr') as HTMLElement;
+      addr.textContent = message;
+      addr.style.color = '#c46a6a';
+    }
+
+    async function init() {
+      const ip = await resolveIp(DOMAIN);
+      if (!ip) {
+        setError(document.getElementById('card1')!, 'DNS 解析失败');
+        setError(document.getElementById('card2')!, 'DNS 解析失败');
+        return;
+      }
+
+      const card1 = document.getElementById('card1')!;
+      const card2 = document.getElementById('card2')!;
+      setReady(card1, ip, card1.dataset.port!);
+      setReady(card2, ip, card2.dataset.port!);
+    }
+
+    init();
+  </script>
+</body>
+</html>
