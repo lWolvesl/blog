@@ -32,6 +32,18 @@
       <p class="addr" id="addr2">正在解析...</p>
       <span class="tag">Ragnarok</span>
     </div>
+
+    <div class="card" id="card3" data-port="7781">
+      <div class="map-icon extinction">
+        <svg viewBox="0 0 64 64" width="40" height="40" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M32 8L12 28l8 4-6 10 18-8 18 8-6-10 8-4L32 8z"/>
+          <circle cx="32" cy="26" r="3"/>
+        </svg>
+      </div>
+      <h2>灭绝</h2>
+      <p class="addr" id="addr3">正在解析...</p>
+      <span class="tag">Extinction</span>
+    </div>
   </div>
 
   <style>
@@ -150,6 +162,21 @@
       border-color: rgba(74, 111, 165, 0.25);
     }
 
+    .map-icon.extinction {
+      background: linear-gradient(135deg, #8b5a2b, #5c3a1e);
+      box-shadow: 0 4px 16px rgba(139, 90, 43, 0.3);
+    }
+
+    .card.ready:hover .map-icon.extinction {
+      box-shadow: 0 6px 24px rgba(139, 90, 43, 0.4);
+    }
+
+    .card:nth-child(3) .tag {
+      color: #a88b6a;
+      background: rgba(139, 90, 43, 0.12);
+      border-color: rgba(139, 90, 43, 0.25);
+    }
+
   </style>
 
   <script>
@@ -221,13 +248,16 @@
       if (!ip) {
         setError(document.getElementById('card1')!, 'DNS 解析失败');
         setError(document.getElementById('card2')!, 'DNS 解析失败');
+        setError(document.getElementById('card3')!, 'DNS 解析失败');
         return;
       }
 
       const card1 = document.getElementById('card1')!;
       const card2 = document.getElementById('card2')!;
+      const card3 = document.getElementById('card3')!;
       setReady(card1, ip, card1.dataset.port!);
       setReady(card2, ip, card2.dataset.port!);
+      setReady(card3, ip, card3.dataset.port!);
     }
 
     init();
