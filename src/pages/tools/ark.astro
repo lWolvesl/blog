@@ -164,13 +164,36 @@
     }
 
     async function resolveIp(domain: string): Promise<string | null> {
-      try {
-        const res = await fetch(`https://dns.alidns.com/resolve?name=${encodeURIComponent(domain)}&type=1`);
-        const data = await res.json();
-        return extractARecord(data);
-      } catch {
-        return null;
+      const resolvers = [
+        { url: `https://dns.alidns.com/resolve?name=${encodeURIComponent(domain)}&type=1` },
+        { url: `https://cloudflare-dns.com/dns-query?name=${encodeURIComponent(domain)}&type=A`, headers: { Accept: 'application/dns-json' } }
+      ];
+
+      const startTime = Date.now();
+
+      for (const resolver of resolvers) {
+        const elapsed = Date.now() - startTime;
+        const remaining = 8000 - elapsed;
+        if (remaining <= 0) break;
+
+        const controller = new AbortController();
+        const timer = setTimeout(() => controller.abort(), Math.min(2000, remaining));
+
+        try {
+          const res = await fetch(resolver.url, {
+            signal: controller.signal,
+            headers: resolver.headers || {}
+          });
+          clearTimeout(timer);
+          const data = await res.json();
+          const ip = extractARecord(data);
+          if (ip) return ip;
+        } catch {
+          clearTimeout(timer);
+        }
       }
+
+      return null;
     }
 
     function setReady(card: HTMLElement, ip: string, port: string) {
