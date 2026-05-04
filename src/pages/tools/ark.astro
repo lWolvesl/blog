@@ -44,6 +44,18 @@
       <p class="addr" id="addr3">正在解析...</p>
       <span class="tag">Extinction</span>
     </div>
+
+    <div class="card" id="card4" data-port="7783">
+      <div class="map-icon aberration">
+        <svg viewBox="0 0 64 64" width="40" height="40" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M32 4L16 20l4 4-8 8 12 4-4 12 12-8 12 8-4-12 12-4-8-8 4-4L32 4z"/>
+          <circle cx="32" cy="24" r="3"/>
+        </svg>
+      </div>
+      <h2>畸变</h2>
+      <p class="addr" id="addr4">正在解析...</p>
+      <span class="tag">Aberration</span>
+    </div>
   </div>
 
   <style>
@@ -177,6 +189,21 @@
       border-color: rgba(139, 90, 43, 0.25);
     }
 
+    .map-icon.aberration {
+      background: linear-gradient(135deg, #6b2d6b, #3a1e3a);
+      box-shadow: 0 4px 16px rgba(107, 45, 107, 0.3);
+    }
+
+    .card.ready:hover .map-icon.aberration {
+      box-shadow: 0 6px 24px rgba(107, 45, 107, 0.4);
+    }
+
+    .card:nth-child(4) .tag {
+      color: #a86aa8;
+      background: rgba(107, 45, 107, 0.12);
+      border-color: rgba(107, 45, 107, 0.25);
+    }
+
   </style>
 
   <script>
@@ -249,15 +276,18 @@
         setError(document.getElementById('card1')!, 'DNS 解析失败');
         setError(document.getElementById('card2')!, 'DNS 解析失败');
         setError(document.getElementById('card3')!, 'DNS 解析失败');
+        setError(document.getElementById('card4')!, 'DNS 解析失败');
         return;
       }
 
       const card1 = document.getElementById('card1')!;
       const card2 = document.getElementById('card2')!;
       const card3 = document.getElementById('card3')!;
+      const card4 = document.getElementById('card4')!;
       setReady(card1, ip, card1.dataset.port!);
       setReady(card2, ip, card2.dataset.port!);
       setReady(card3, ip, card3.dataset.port!);
+      setReady(card4, ip, card4.dataset.port!);
     }
 
     init();
