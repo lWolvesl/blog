@@ -18,6 +18,7 @@
       <h2>孤岛</h2>
       <p class="addr" id="addr1">正在解析...</p>
       <span class="tag">The Island</span>
+      <p class="query">0.wolves.top:27015</p>
     </div>
 
     <div class="card" id="card2" data-port="7779">
@@ -31,6 +32,7 @@
       <h2>仙境</h2>
       <p class="addr" id="addr2">正在解析...</p>
       <span class="tag">Ragnarok</span>
+      <p class="query">0.wolves.top:27016</p>
     </div>
 
     <div class="card" id="card3" data-port="7781">
@@ -43,6 +45,7 @@
       <h2>灭绝</h2>
       <p class="addr" id="addr3">正在解析...</p>
       <span class="tag">Extinction</span>
+      <p class="query">0.wolves.top:27017</p>
     </div>
 
     <div class="card" id="card4" data-port="7783">
@@ -55,6 +58,21 @@
       <h2>畸变</h2>
       <p class="addr" id="addr4">正在解析...</p>
       <span class="tag">Aberration</span>
+      <p class="query">0.wolves.top:27018</p>
+    </div>
+
+    <div class="card" id="card5" data-port="7785">
+      <div class="map-icon genesis">
+        <svg viewBox="0 0 64 64" width="40" height="40" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M32 6a26 26 0 1 0 0 52 26 26 0 0 0 0-52z"/>
+          <path d="M32 16c-8 6-12 12-12 20 0 7 5 12 12 12s12-5 12-12c0-8-4-14-12-20z"/>
+          <path d="M24 34h16M32 24v24"/>
+        </svg>
+      </div>
+      <h2>创世一</h2>
+      <p class="addr" id="addr5">正在解析...</p>
+      <span class="tag">Genesis Part 1</span>
+      <p class="query">0.wolves.top:27019</p>
     </div>
   </div>
 
@@ -74,15 +92,19 @@
 
     .container {
       display: grid;
-      grid-template-columns: 1fr 1fr;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
       gap: 24px;
-      max-width: 560px;
+      max-width: 952px;
       width: 100%;
     }
 
     @media (max-width: 480px) {
       .container {
         grid-template-columns: 1fr;
+      }
+
+      .query {
+        font-size: 0.7rem;
       }
     }
 
@@ -149,10 +171,18 @@
     }
 
     .addr {
-      margin: 0 0 14px 0;
+      margin: 0 0 8px 0;
       font-size: 0.85rem;
       color: #7a8fa8;
       font-family: 'SF Mono', Monaco, monospace;
+    }
+
+    .query {
+      margin: 12px 0 0 0;
+      font-size: 0.72rem;
+      color: #8fa0b4;
+      font-family: 'SF Mono', Monaco, monospace;
+      white-space: nowrap;
     }
 
     .tag {
@@ -202,6 +232,21 @@
       color: #a86aa8;
       background: rgba(107, 45, 107, 0.12);
       border-color: rgba(107, 45, 107, 0.25);
+    }
+
+    .map-icon.genesis {
+      background: linear-gradient(135deg, #2d8a8a, #1d4f63);
+      box-shadow: 0 4px 16px rgba(45, 138, 138, 0.3);
+    }
+
+    .card.ready:hover .map-icon.genesis {
+      box-shadow: 0 6px 24px rgba(45, 138, 138, 0.4);
+    }
+
+    .card:nth-child(5) .tag {
+      color: #6aa8a8;
+      background: rgba(45, 138, 138, 0.12);
+      border-color: rgba(45, 138, 138, 0.25);
     }
 
   </style>
@@ -277,6 +322,7 @@
         setError(document.getElementById('card2')!, 'DNS 解析失败');
         setError(document.getElementById('card3')!, 'DNS 解析失败');
         setError(document.getElementById('card4')!, 'DNS 解析失败');
+        setError(document.getElementById('card5')!, 'DNS 解析失败');
         return;
       }
 
@@ -284,10 +330,12 @@
       const card2 = document.getElementById('card2')!;
       const card3 = document.getElementById('card3')!;
       const card4 = document.getElementById('card4')!;
+      const card5 = document.getElementById('card5')!;
       setReady(card1, ip, card1.dataset.port!);
       setReady(card2, ip, card2.dataset.port!);
       setReady(card3, ip, card3.dataset.port!);
       setReady(card4, ip, card4.dataset.port!);
+      setReady(card5, ip, card5.dataset.port!);
     }
 
     init();
