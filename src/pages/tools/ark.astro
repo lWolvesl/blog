@@ -74,6 +74,22 @@
       <span class="tag">Genesis Part 1</span>
       <p class="query">0.wolves.top:27019</p>
     </div>
+
+    <div class="card" id="card6" data-port="7787">
+      <div class="map-icon genesis-two">
+        <svg viewBox="0 0 64 64" width="40" height="40" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M32 6a26 26 0 1 0 0 52 26 26 0 0 0 0-52z"/>
+          <path d="M18 38c7-12 21-12 28 0"/>
+          <path d="M20 26c6 5 18 5 24 0"/>
+          <path d="M32 16v32"/>
+          <circle cx="32" cy="32" r="4"/>
+        </svg>
+      </div>
+      <h2>创世二</h2>
+      <p class="addr" id="addr6">正在解析...</p>
+      <span class="tag">Genesis Part 2</span>
+      <p class="query">0.wolves.top:27020</p>
+    </div>
   </div>
 
   <style>
@@ -249,6 +265,21 @@
       border-color: rgba(45, 138, 138, 0.25);
     }
 
+    .map-icon.genesis-two {
+      background: linear-gradient(135deg, #5c7cfa, #364fc7);
+      box-shadow: 0 4px 16px rgba(92, 124, 250, 0.3);
+    }
+
+    .card.ready:hover .map-icon.genesis-two {
+      box-shadow: 0 6px 24px rgba(92, 124, 250, 0.4);
+    }
+
+    .card:nth-child(6) .tag {
+      color: #8fa2ff;
+      background: rgba(92, 124, 250, 0.12);
+      border-color: rgba(92, 124, 250, 0.25);
+    }
+
   </style>
 
   <script>
@@ -323,6 +354,7 @@
         setError(document.getElementById('card3')!, 'DNS 解析失败');
         setError(document.getElementById('card4')!, 'DNS 解析失败');
         setError(document.getElementById('card5')!, 'DNS 解析失败');
+        setError(document.getElementById('card6')!, 'DNS 解析失败');
         return;
       }
 
@@ -331,11 +363,13 @@
       const card3 = document.getElementById('card3')!;
       const card4 = document.getElementById('card4')!;
       const card5 = document.getElementById('card5')!;
+      const card6 = document.getElementById('card6')!;
       setReady(card1, ip, card1.dataset.port!);
       setReady(card2, ip, card2.dataset.port!);
       setReady(card3, ip, card3.dataset.port!);
       setReady(card4, ip, card4.dataset.port!);
       setReady(card5, ip, card5.dataset.port!);
+      setReady(card6, ip, card6.dataset.port!);
     }
 
     init();
