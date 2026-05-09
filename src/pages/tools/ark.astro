@@ -90,6 +90,21 @@
       <span class="tag">Genesis Part 2</span>
       <p class="query">0.wolves.top:27020</p>
     </div>
+
+    <a class="card download-card" href="/dl/ark-se-zh.zip" download>
+      <div class="map-icon download-icon">
+        <svg viewBox="0 0 64 64" width="40" height="40" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M32 10v30"/>
+          <path d="M20 30l12 12 12-12"/>
+          <path d="M14 46v6h36v-6"/>
+          <path d="M20 18h24"/>
+        </svg>
+      </div>
+      <h2>中文修复</h2>
+      <p class="addr">方舟中文修复工具</p>
+      <span class="tag">Download</span>
+      <p class="query">ark-se-zh.zip</p>
+    </a>
   </div>
 
   <style>
@@ -134,17 +149,28 @@
       user-select: none;
     }
 
+    a.card {
+      display: block;
+      text-decoration: none;
+    }
+
     .card.ready {
       cursor: pointer;
     }
 
-    .card.ready:hover {
+    .download-card {
+      cursor: pointer;
+    }
+
+    .card.ready:hover,
+    .download-card:hover {
       transform: translateY(-4px);
       border-color: #2d6a4f;
       box-shadow: 0 12px 32px rgba(45, 106, 79, 0.2);
     }
 
-    .card.ready:active {
+    .card.ready:active,
+    .download-card:active {
       transform: translateY(-1px);
     }
 
@@ -278,6 +304,21 @@
       color: #8fa2ff;
       background: rgba(92, 124, 250, 0.12);
       border-color: rgba(92, 124, 250, 0.25);
+    }
+
+    .map-icon.download-icon {
+      background: linear-gradient(135deg, #3b7a57, #23543a);
+      box-shadow: 0 4px 16px rgba(59, 122, 87, 0.3);
+    }
+
+    .download-card:hover .map-icon.download-icon {
+      box-shadow: 0 6px 24px rgba(59, 122, 87, 0.4);
+    }
+
+    .card:nth-child(7) .tag {
+      color: #7ab893;
+      background: rgba(59, 122, 87, 0.12);
+      border-color: rgba(59, 122, 87, 0.25);
     }
 
   </style>
