@@ -7,6 +7,21 @@
 </head>
 <body>
   <div class="container">
+    <a class="card download-card" href="/dl/ark-se-zh.zip" download>
+      <div class="map-icon download-icon">
+        <svg viewBox="0 0 64 64" width="40" height="40" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M32 10v30"/>
+          <path d="M20 30l12 12 12-12"/>
+          <path d="M14 46v6h36v-6"/>
+          <path d="M20 18h24"/>
+        </svg>
+      </div>
+      <h2>中文修复</h2>
+      <p class="addr">方舟中文修复工具</p>
+      <span class="tag">Download</span>
+      <p class="query">ark-se-zh.zip</p>
+    </a>
+
     <div class="card" id="card1" data-port="7777">
       <div class="map-icon">
         <svg viewBox="0 0 64 64" width="40" height="40" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
@@ -91,20 +106,22 @@
       <p class="query">0.wolves.top:27020</p>
     </div>
 
-    <a class="card download-card" href="/dl/ark-se-zh.zip" download>
-      <div class="map-icon download-icon">
+    <div class="card" id="card7" data-port="7789">
+      <div class="map-icon viking">
         <svg viewBox="0 0 64 64" width="40" height="40" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
-          <path d="M32 10v30"/>
-          <path d="M20 30l12 12 12-12"/>
-          <path d="M14 46v6h36v-6"/>
-          <path d="M20 18h24"/>
+          <path d="M14 44c7-15 29-15 36 0"/>
+          <path d="M20 34l-6-10 10 4"/>
+          <path d="M44 34l6-10-10 4"/>
+          <path d="M22 26c4-5 16-5 20 0"/>
+          <path d="M26 42h12"/>
+          <path d="M32 24v20"/>
         </svg>
       </div>
-      <h2>中文修复</h2>
-      <p class="addr">方舟中文修复工具</p>
-      <span class="tag">Download</span>
-      <p class="query">ark-se-zh.zip</p>
-    </a>
+      <h2>维京</h2>
+      <p class="addr" id="addr7">正在解析...</p>
+      <span class="tag">Fjordur</span>
+      <p class="query">0.wolves.top:27021</p>
+    </div>
   </div>
 
   <style>
@@ -240,7 +257,7 @@
       border: 1px solid rgba(45, 106, 79, 0.25);
     }
 
-    .card:nth-child(2) .tag {
+    .card:nth-child(3) .tag {
       color: #6a85a8;
       background: rgba(74, 111, 165, 0.12);
       border-color: rgba(74, 111, 165, 0.25);
@@ -255,7 +272,7 @@
       box-shadow: 0 6px 24px rgba(139, 90, 43, 0.4);
     }
 
-    .card:nth-child(3) .tag {
+    .card:nth-child(4) .tag {
       color: #a88b6a;
       background: rgba(139, 90, 43, 0.12);
       border-color: rgba(139, 90, 43, 0.25);
@@ -270,7 +287,7 @@
       box-shadow: 0 6px 24px rgba(107, 45, 107, 0.4);
     }
 
-    .card:nth-child(4) .tag {
+    .card:nth-child(5) .tag {
       color: #a86aa8;
       background: rgba(107, 45, 107, 0.12);
       border-color: rgba(107, 45, 107, 0.25);
@@ -285,7 +302,7 @@
       box-shadow: 0 6px 24px rgba(45, 138, 138, 0.4);
     }
 
-    .card:nth-child(5) .tag {
+    .card:nth-child(6) .tag {
       color: #6aa8a8;
       background: rgba(45, 138, 138, 0.12);
       border-color: rgba(45, 138, 138, 0.25);
@@ -300,7 +317,7 @@
       box-shadow: 0 6px 24px rgba(92, 124, 250, 0.4);
     }
 
-    .card:nth-child(6) .tag {
+    .card:nth-child(7) .tag {
       color: #8fa2ff;
       background: rgba(92, 124, 250, 0.12);
       border-color: rgba(92, 124, 250, 0.25);
@@ -315,10 +332,25 @@
       box-shadow: 0 6px 24px rgba(59, 122, 87, 0.4);
     }
 
-    .card:nth-child(7) .tag {
+    .download-card .tag {
       color: #7ab893;
       background: rgba(59, 122, 87, 0.12);
       border-color: rgba(59, 122, 87, 0.25);
+    }
+
+    .map-icon.viking {
+      background: linear-gradient(135deg, #64748b, #334155);
+      box-shadow: 0 4px 16px rgba(100, 116, 139, 0.3);
+    }
+
+    .card.ready:hover .map-icon.viking {
+      box-shadow: 0 6px 24px rgba(100, 116, 139, 0.4);
+    }
+
+    .card:nth-child(8) .tag {
+      color: #9fb0c7;
+      background: rgba(100, 116, 139, 0.12);
+      border-color: rgba(100, 116, 139, 0.25);
     }
 
   </style>
@@ -396,6 +428,7 @@
         setError(document.getElementById('card4')!, 'DNS 解析失败');
         setError(document.getElementById('card5')!, 'DNS 解析失败');
         setError(document.getElementById('card6')!, 'DNS 解析失败');
+        setError(document.getElementById('card7')!, 'DNS 解析失败');
         return;
       }
 
@@ -405,12 +438,14 @@
       const card4 = document.getElementById('card4')!;
       const card5 = document.getElementById('card5')!;
       const card6 = document.getElementById('card6')!;
+      const card7 = document.getElementById('card7')!;
       setReady(card1, ip, card1.dataset.port!);
       setReady(card2, ip, card2.dataset.port!);
       setReady(card3, ip, card3.dataset.port!);
       setReady(card4, ip, card4.dataset.port!);
       setReady(card5, ip, card5.dataset.port!);
       setReady(card6, ip, card6.dataset.port!);
+      setReady(card7, ip, card7.dataset.port!);
     }
 
     init();
