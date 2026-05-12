@@ -7,7 +7,7 @@
 </head>
 <body>
   <div class="container">
-    <a class="card download-card" href="/dl/ark-se-zh.zip" download>
+    <a class="card download-card" id="downloadCard" href="/dl/ark-se-zh.zip" download="ark-se-zh.zip">
       <div class="map-icon download-icon">
         <svg viewBox="0 0 64 64" width="40" height="40" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
           <path d="M32 10v30"/>
@@ -22,7 +22,7 @@
       <p class="query">ark-se-zh.zip</p>
     </a>
 
-    <div class="card" id="card1" data-port="7777">
+    <div class="card" id="card1" data-port="7777" data-server-id="1">
       <div class="map-icon">
         <svg viewBox="0 0 64 64" width="40" height="40" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
           <path d="M32 6C18 6 8 16 8 28c0 8 4 14 10 18l14 12 14-12c6-4 10-10 10-18 0-12-10-22-22-22z"/>
@@ -33,10 +33,15 @@
       <h2>孤岛</h2>
       <p class="addr" id="addr1">正在解析...</p>
       <span class="tag">The Island</span>
+      <div class="status-corner" aria-label="状态加载中">
+        <span class="status-light"></span>
+        <span class="player-count"></span>
+        <ul class="players" aria-label="在线玩家"></ul>
+      </div>
       <p class="query">0.wolves.top:27015</p>
     </div>
 
-    <div class="card" id="card2" data-port="7779">
+    <div class="card" id="card2" data-port="7779" data-server-id="2">
       <div class="map-icon valley">
         <svg viewBox="0 0 64 64" width="40" height="40" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
           <path d="M8 48L20 24l8 12 8-16 12 20 8-8"/>
@@ -47,10 +52,15 @@
       <h2>仙境</h2>
       <p class="addr" id="addr2">正在解析...</p>
       <span class="tag">Ragnarok</span>
+      <div class="status-corner" aria-label="状态加载中">
+        <span class="status-light"></span>
+        <span class="player-count"></span>
+        <ul class="players" aria-label="在线玩家"></ul>
+      </div>
       <p class="query">0.wolves.top:27016</p>
     </div>
 
-    <div class="card" id="card3" data-port="7781">
+    <div class="card" id="card3" data-port="7781" data-server-id="5">
       <div class="map-icon extinction">
         <svg viewBox="0 0 64 64" width="40" height="40" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
           <path d="M32 8L12 28l8 4-6 10 18-8 18 8-6-10 8-4L32 8z"/>
@@ -60,10 +70,15 @@
       <h2>灭绝</h2>
       <p class="addr" id="addr3">正在解析...</p>
       <span class="tag">Extinction</span>
+      <div class="status-corner" aria-label="状态加载中">
+        <span class="status-light"></span>
+        <span class="player-count"></span>
+        <ul class="players" aria-label="在线玩家"></ul>
+      </div>
       <p class="query">0.wolves.top:27017</p>
     </div>
 
-    <div class="card" id="card4" data-port="7783">
+    <div class="card" id="card4" data-port="7783" data-server-id="3">
       <div class="map-icon aberration">
         <svg viewBox="0 0 64 64" width="40" height="40" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
           <path d="M32 4L16 20l4 4-8 8 12 4-4 12 12-8 12 8-4-12 12-4-8-8 4-4L32 4z"/>
@@ -73,10 +88,15 @@
       <h2>畸变</h2>
       <p class="addr" id="addr4">正在解析...</p>
       <span class="tag">Aberration</span>
+      <div class="status-corner" aria-label="状态加载中">
+        <span class="status-light"></span>
+        <span class="player-count"></span>
+        <ul class="players" aria-label="在线玩家"></ul>
+      </div>
       <p class="query">0.wolves.top:27018</p>
     </div>
 
-    <div class="card" id="card5" data-port="7785">
+    <div class="card" id="card5" data-port="7785" data-server-id="4">
       <div class="map-icon genesis">
         <svg viewBox="0 0 64 64" width="40" height="40" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
           <path d="M32 6a26 26 0 1 0 0 52 26 26 0 0 0 0-52z"/>
@@ -87,10 +107,15 @@
       <h2>创世一</h2>
       <p class="addr" id="addr5">正在解析...</p>
       <span class="tag">Genesis Part 1</span>
+      <div class="status-corner" aria-label="状态加载中">
+        <span class="status-light"></span>
+        <span class="player-count"></span>
+        <ul class="players" aria-label="在线玩家"></ul>
+      </div>
       <p class="query">0.wolves.top:27019</p>
     </div>
 
-    <div class="card" id="card6" data-port="7787">
+    <div class="card" id="card6" data-port="7787" data-server-id="6">
       <div class="map-icon genesis-two">
         <svg viewBox="0 0 64 64" width="40" height="40" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
           <path d="M32 6a26 26 0 1 0 0 52 26 26 0 0 0 0-52z"/>
@@ -103,10 +128,15 @@
       <h2>创世二</h2>
       <p class="addr" id="addr6">正在解析...</p>
       <span class="tag">Genesis Part 2</span>
+      <div class="status-corner" aria-label="状态加载中">
+        <span class="status-light"></span>
+        <span class="player-count"></span>
+        <ul class="players" aria-label="在线玩家"></ul>
+      </div>
       <p class="query">0.wolves.top:27020</p>
     </div>
 
-    <div class="card" id="card7" data-port="7789">
+    <div class="card" id="card7" data-port="7789" data-server-id="7">
       <div class="map-icon viking">
         <svg viewBox="0 0 64 64" width="40" height="40" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
           <path d="M14 44c7-15 29-15 36 0"/>
@@ -120,6 +150,11 @@
       <h2>维京</h2>
       <p class="addr" id="addr7">正在解析...</p>
       <span class="tag">Fjordur</span>
+      <div class="status-corner" aria-label="状态加载中">
+        <span class="status-light"></span>
+        <span class="player-count"></span>
+        <ul class="players" aria-label="在线玩家"></ul>
+      </div>
       <p class="query">0.wolves.top:27021</p>
     </div>
   </div>
@@ -157,6 +192,7 @@
     }
 
     .card {
+      position: relative;
       background: #1a2332;
       border: 1px solid #263245;
       border-radius: 16px;
@@ -242,6 +278,85 @@
       color: #8fa0b4;
       font-family: 'SF Mono', Monaco, monospace;
       white-space: nowrap;
+    }
+
+    .status-corner {
+      position: absolute;
+      top: 18px;
+      right: 18px;
+      display: flex;
+      align-items: center;
+      flex-direction: column;
+      gap: 5px;
+      min-width: 36px;
+      z-index: 2;
+    }
+
+    .status-light {
+      width: 13px;
+      height: 13px;
+      border-radius: 50%;
+      background: #64748b;
+      box-shadow: 0 0 0 4px rgba(100, 116, 139, 0.14);
+    }
+
+    .card.online .status-light {
+      background: #2dd36f;
+      box-shadow: 0 0 0 4px rgba(45, 211, 111, 0.15), 0 0 14px rgba(45, 211, 111, 0.55);
+    }
+
+    .card.offline .status-light {
+      background: #ef4444;
+      box-shadow: 0 0 0 4px rgba(239, 68, 68, 0.14), 0 0 12px rgba(239, 68, 68, 0.35);
+    }
+
+    .player-count {
+      display: none;
+      color: #74c69d;
+      font-family: 'SF Mono', Monaco, monospace;
+      font-size: 0.68rem;
+      font-weight: 700;
+      line-height: 1;
+    }
+
+    .card.online .player-count {
+      display: block;
+    }
+
+    .players {
+      position: absolute;
+      top: 32px;
+      right: 0;
+      display: none;
+      min-width: 126px;
+      max-width: 190px;
+      margin: 0;
+      padding: 8px;
+      border: 1px solid #334155;
+      border-radius: 10px;
+      background: rgba(15, 20, 25, 0.96);
+      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.32);
+      list-style: none;
+    }
+
+    .card.online:hover .players {
+      display: flex;
+      flex-direction: column;
+      align-items: stretch;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+
+    .players li {
+      padding: 4px 8px;
+      border-radius: 7px;
+      background: rgba(143, 160, 180, 0.12);
+      color: #d7deea;
+      font-family: 'SF Mono', Monaco, monospace;
+      font-size: 0.7rem;
+      line-height: 1.4;
+      text-align: left;
+      overflow-wrap: anywhere;
     }
 
     .tag {
@@ -357,6 +472,36 @@
 
   <script>
     const DOMAIN = '1.wolves.top';
+    const STATUS_API = 'https://ark.wolves.top/api/list';
+    const FALLBACK_SERVERS = [
+      { id: 1, name: '孤岛', online: false, count: 0, players: [] },
+      { id: 2, name: '仙境', online: false, count: 0, players: [] },
+      { id: 3, name: '畸变', online: false, count: 0, players: [] },
+      { id: 4, name: '创世1', online: false, count: 0, players: [] },
+      { id: 5, name: '灭绝', online: false, count: 0, players: [] },
+      { id: 6, name: '创世2', online: false, count: 0, players: [] },
+      { id: 7, name: '维京', online: false, count: 0, players: [] },
+    ];
+
+    function initDownloadConfirmation() {
+      const downloadCard = document.getElementById('downloadCard') as HTMLAnchorElement | null;
+      if (!downloadCard) return;
+
+      downloadCard.addEventListener('click', (event) => {
+        event.preventDefault();
+
+        const fileName = downloadCard.getAttribute('download') || '中文修复工具';
+        const confirmed = window.confirm(`确认下载 ${fileName} 吗？`);
+        if (!confirmed) return;
+
+        const link = document.createElement('a');
+        link.href = downloadCard.href;
+        link.download = fileName;
+        document.body.appendChild(link);
+        link.click();
+        link.remove();
+      });
+    }
 
     function extractARecord(data: any): string | null {
       if (data.Status !== 0 || !data.Answer) return null;
@@ -419,7 +564,57 @@
       addr.style.color = '#c46a6a';
     }
 
+    function updateServerCard(server: any) {
+      const card = document.querySelector(`[data-server-id="${server.id}"]`) as HTMLElement | null;
+      if (!card) return;
+
+      const players = Array.isArray(server.players) ? server.players : [];
+      const count = Number(server.count || players.length || 0);
+      const status = card.querySelector('.status-corner') as HTMLElement;
+      const playerCount = card.querySelector('.player-count') as HTMLElement;
+      const playerList = card.querySelector('.players') as HTMLUListElement;
+
+      card.classList.toggle('online', Boolean(server.online));
+      card.classList.toggle('offline', !server.online);
+      status.setAttribute('aria-label', server.online ? `在线，${count}/10` : '离线');
+      playerCount.textContent = server.online ? `${count}/10` : '';
+      playerList.textContent = '';
+
+      if (!server.online) {
+        return;
+      }
+
+      if (players.length === 0) {
+        const empty = document.createElement('li');
+        empty.textContent = '暂无玩家';
+        playerList.appendChild(empty);
+        return;
+      }
+
+      for (const player of players) {
+        const item = document.createElement('li');
+        item.textContent = String(player);
+        playerList.appendChild(item);
+      }
+    }
+
+    async function loadServerStatus() {
+      try {
+        const response = await fetch(STATUS_API);
+        if (!response.ok) throw new Error(`HTTP ${response.status}`);
+
+        const data = await response.json();
+        const servers = Array.isArray(data.servers) ? data.servers : FALLBACK_SERVERS;
+        for (const server of servers) updateServerCard(server);
+      } catch (error) {
+        for (const server of FALLBACK_SERVERS) updateServerCard(server);
+        console.error('Failed to load server status:', error);
+      }
+    }
+
     async function init() {
+      loadServerStatus();
+
       const ip = await resolveIp(DOMAIN);
       if (!ip) {
         setError(document.getElementById('card1')!, 'DNS 解析失败');
@@ -448,6 +643,7 @@
       setReady(card7, ip, card7.dataset.port!);
     }
 
+    initDownloadConfirmation();
     init();
   </script>
 </body>
