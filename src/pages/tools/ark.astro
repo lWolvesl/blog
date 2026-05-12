@@ -302,12 +302,38 @@
 
     .card.online .status-light {
       background: #2dd36f;
+      animation: online-pulse 2.8s ease-in-out infinite;
       box-shadow: 0 0 0 4px rgba(45, 211, 111, 0.15), 0 0 14px rgba(45, 211, 111, 0.55);
     }
 
     .card.offline .status-light {
       background: #ef4444;
+      animation: offline-pulse 3.2s ease-in-out infinite;
       box-shadow: 0 0 0 4px rgba(239, 68, 68, 0.14), 0 0 12px rgba(239, 68, 68, 0.35);
+    }
+
+    @keyframes online-pulse {
+      0%, 100% {
+        opacity: 0.78;
+        box-shadow: 0 0 0 4px rgba(45, 211, 111, 0.1), 0 0 10px rgba(45, 211, 111, 0.35);
+      }
+
+      50% {
+        opacity: 1;
+        box-shadow: 0 0 0 5px rgba(45, 211, 111, 0.22), 0 0 20px rgba(45, 211, 111, 0.75);
+      }
+    }
+
+    @keyframes offline-pulse {
+      0%, 100% {
+        opacity: 0.72;
+        box-shadow: 0 0 0 4px rgba(239, 68, 68, 0.08), 0 0 8px rgba(239, 68, 68, 0.22);
+      }
+
+      50% {
+        opacity: 1;
+        box-shadow: 0 0 0 5px rgba(239, 68, 68, 0.2), 0 0 17px rgba(239, 68, 68, 0.58);
+      }
     }
 
     .player-count {
@@ -325,18 +351,46 @@
 
     .players {
       position: absolute;
-      top: 32px;
-      right: 0;
+      top: 42px;
+      right: -2px;
       display: none;
-      min-width: 126px;
-      max-width: 190px;
+      min-width: 156px;
+      max-width: 220px;
       margin: 0;
-      padding: 8px;
-      border: 1px solid #334155;
-      border-radius: 10px;
-      background: rgba(15, 20, 25, 0.96);
-      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.32);
+      padding: 34px 10px 10px;
+      border: 1px solid rgba(116, 198, 157, 0.42);
+      border-radius: 12px;
+      background: linear-gradient(180deg, rgba(10, 16, 24, 0.98), rgba(17, 24, 39, 0.98));
+      box-shadow: 0 16px 36px rgba(0, 0, 0, 0.55), 0 0 0 1px rgba(255, 255, 255, 0.04) inset;
       list-style: none;
+    }
+
+    .players::before {
+      content: "在线玩家";
+      position: absolute;
+      top: 9px;
+      left: 10px;
+      right: 10px;
+      padding-bottom: 7px;
+      border-bottom: 1px solid rgba(116, 198, 157, 0.22);
+      color: #74c69d;
+      font-size: 0.68rem;
+      font-weight: 800;
+      letter-spacing: 1.4px;
+      text-align: left;
+    }
+
+    .players::after {
+      content: "";
+      position: absolute;
+      top: -6px;
+      right: 14px;
+      width: 10px;
+      height: 10px;
+      border-top: 1px solid rgba(116, 198, 157, 0.42);
+      border-left: 1px solid rgba(116, 198, 157, 0.42);
+      background: rgba(10, 16, 24, 0.98);
+      transform: rotate(45deg);
     }
 
     .card.online:hover .players {
@@ -348,15 +402,29 @@
     }
 
     .players li {
-      padding: 4px 8px;
-      border-radius: 7px;
-      background: rgba(143, 160, 180, 0.12);
-      color: #d7deea;
+      padding: 6px 9px;
+      border: 1px solid rgba(148, 163, 184, 0.18);
+      border-radius: 8px;
+      background: rgba(15, 23, 42, 0.86);
+      color: #f8fafc;
       font-family: 'SF Mono', Monaco, monospace;
-      font-size: 0.7rem;
+      font-size: 0.72rem;
+      font-weight: 700;
       line-height: 1.4;
       text-align: left;
       overflow-wrap: anywhere;
+    }
+
+    .players li::before {
+      content: "";
+      display: inline-block;
+      width: 6px;
+      height: 6px;
+      margin-right: 7px;
+      border-radius: 50%;
+      background: #2dd36f;
+      box-shadow: 0 0 8px rgba(45, 211, 111, 0.65);
+      vertical-align: 1px;
     }
 
     .tag {
