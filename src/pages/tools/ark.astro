@@ -539,8 +539,8 @@
   </style>
 
   <script>
-    const DOMAIN = '1.wolves.top';
     const STATUS_API = 'https://ark.wolves.top/api/list';
+    const IP_API = 'https://ark.wolves.top/api/ip';
     const FALLBACK_SERVERS = [
       { id: 1, name: '孤岛', online: false, count: 0, players: [] },
       { id: 2, name: '仙境', online: false, count: 0, players: [] },
@@ -571,45 +571,15 @@
       });
     }
 
-    function extractARecord(data: any): string | null {
-      if (data.Status !== 0 || !data.Answer) return null;
-      for (const ans of data.Answer) {
-        if (ans.type === 1) return ans.data;
+    async function resolveIp(): Promise<string | null> {
+      try {
+        const res = await fetch(IP_API);
+        if (!res.ok) return null;
+        const data = await res.json();
+        return data.ip || null;
+      } catch {
+        return null;
       }
-      return null;
-    }
-
-    async function resolveIp(domain: string): Promise<string | null> {
-      const resolvers = [
-        { url: `https://dns.alidns.com/resolve?name=${encodeURIComponent(domain)}&type=1` },
-        { url: `https://cloudflare-dns.com/dns-query?name=${encodeURIComponent(domain)}&type=A`, headers: { Accept: 'application/dns-json' } }
-      ];
-
-      const startTime = Date.now();
-
-      for (const resolver of resolvers) {
-        const elapsed = Date.now() - startTime;
-        const remaining = 8000 - elapsed;
-        if (remaining <= 0) break;
-
-        const controller = new AbortController();
-        const timer = setTimeout(() => controller.abort(), Math.min(2000, remaining));
-
-        try {
-          const res = await fetch(resolver.url, {
-            signal: controller.signal,
-            headers: resolver.headers || {}
-          });
-          clearTimeout(timer);
-          const data = await res.json();
-          const ip = extractARecord(data);
-          if (ip) return ip;
-        } catch {
-          clearTimeout(timer);
-        }
-      }
-
-      return null;
     }
 
     function setReady(card: HTMLElement, ip: string, port: string) {
@@ -683,15 +653,15 @@
     async function init() {
       loadServerStatus();
 
-      const ip = await resolveIp(DOMAIN);
+      const ip = await resolveIp();
       if (!ip) {
-        setError(document.getElementById('card1')!, 'DNS 解析失败');
-        setError(document.getElementById('card2')!, 'DNS 解析失败');
-        setError(document.getElementById('card3')!, 'DNS 解析失败');
-        setError(document.getElementById('card4')!, 'DNS 解析失败');
-        setError(document.getElementById('card5')!, 'DNS 解析失败');
-        setError(document.getElementById('card6')!, 'DNS 解析失败');
-        setError(document.getElementById('card7')!, 'DNS 解析失败');
+        setError(document.getElementById('card1')!, 'IP 获取失败');
+        setError(document.getElementById('card2')!, 'IP 获取失败');
+        setError(document.getElementById('card3')!, 'IP 获取失败');
+        setError(document.getElementById('card4')!, 'IP 获取失败');
+        setError(document.getElementById('card5')!, 'IP 获取失败');
+        setError(document.getElementById('card6')!, 'IP 获取失败');
+        setError(document.getElementById('card7')!, 'IP 获取失败');
         return;
       }
 
